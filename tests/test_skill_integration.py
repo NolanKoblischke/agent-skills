@@ -52,6 +52,13 @@ class SkillIntegrationTests(unittest.TestCase):
         text = (ROOT / "skills" / "reveal-assumptions" / "SKILL.md").read_text()
         self.assertNotIn("Stop hook", text)
         self.assertNotIn("Stop-hook", text)
+        self.assertIn(
+            "Write each top-five title as an actionable issue title", text
+        )
+        self.assertIn(
+            "the title must be understandable without reading any supporting explanation",
+            text,
+        )
 
 
 if __name__ == "__main__":

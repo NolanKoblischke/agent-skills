@@ -9,6 +9,8 @@ Audit this completed work and list every implicit assumption or unstated decisio
 
 Actively identify choices made without direct evidence that they preserve the user’s intended outcome, and prioritize those most likely to change the result if wrong.
 
+Write each top-five title as an actionable issue title that names the affected component or calculation, states the concrete failure, and indicates the required correction; the title must be understandable without reading any supporting explanation.
+
 Audit the work completed in the current turn and the project's current state.
 Update `.assumptions.html` at the project root before finishing.
 
