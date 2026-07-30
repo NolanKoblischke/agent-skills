@@ -4,7 +4,7 @@
     "name": "nolan-koblischke",
     "displayName": "Nolan Koblischke Skills",
     "description": "A live assumption dashboard for ongoing agent projects.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "repo": "NolanKoblischke/agent-skills",
     "owner": {
       "name": "Nolan Koblischke"

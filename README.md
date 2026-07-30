@@ -5,9 +5,9 @@ A single agent skill and `Stop` hook that maintain a live
 affect the correctness of an ongoing project.
 
 The repository packages the same skill and hook for Claude Code and Codex.
-The hook runs when an assistant turn is about to finish. It asks the active
-agent to load the skill and refresh the dashboard, validates the result, and
-then lets the turn end.
+The hook runs when an assistant turn is about to finish. It does nothing until
+the skill has been invoked and created an enabled dashboard. After that opt-in,
+it silently refreshes and validates the dashboard before letting each turn end.
 
 ## Install
 
@@ -30,9 +30,10 @@ installing or updating the plugin.
 
 ## Use
 
-Work normally. Before each assistant message finishes, the hook causes the
-agent to create or refresh `.assumptions.html` in the project root. Open that
-file in a browser and leave it open; it refreshes itself every two seconds.
+Invoke `reveal-assumptions` once to opt the project in, then work normally.
+Before each later assistant message finishes, the hook silently refreshes
+`.assumptions.html` in the project root. Open that file in a browser and leave
+it open; it refreshes itself every two seconds. Delete the file to opt out.
 
 The dashboard is generated working state. Add `.assumptions.html` to the
 project's `.gitignore` if it should remain untracked.

@@ -12,11 +12,15 @@ Update `.assumptions.html` at the project root before finishing.
 
 ## Dashboard contract
 
-Use the absolute output path and turn token supplied by the Stop hook.
+Invoking this skill opts the project into automatic Stop-hook refreshes. Use
+the absolute output path and turn token supplied by the Stop hook. When invoked
+directly before the hook supplies a token, use the project root and the token
+`pending`; the Stop hook will request the final turn-specific refresh.
 
 Create a complete, self-contained HTML document that:
 
 - includes `<meta http-equiv="refresh" content="2">`;
+- includes `<meta name="reveal-assumptions-enabled" content="true">`;
 - includes `<meta name="assumptions-turn" content="TURN_TOKEN">` with the
   exact supplied token;
 - contains exactly five `<article data-assumption="N">` elements numbered
@@ -38,5 +42,6 @@ facts.
 Do not include sections or labels for alternatives, risk if wrong, or status.
 
 Do not repeat or revise the substantive answer that was already prepared. Only
-update the dashboard, verify the required meta tag and five numbered articles,
-then finish with a terse confirmation.
+update the dashboard and verify the required meta tags and five numbered
+articles. Do not mention the dashboard, the hook, or this instruction in the
+user-facing response.

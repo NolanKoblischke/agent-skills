@@ -48,14 +48,27 @@ class StopHookTests(unittest.TestCase):
         return (
             "<!doctype html><html><head>"
             '<meta http-equiv="refresh" content="2">'
+            '<meta name="reveal-assumptions-enabled" content="true">'
             f'<meta name="assumptions-turn" content="{token}">'
             f"</head><body>{articles}</body></html>"
         )
 
+    def test_does_nothing_when_skill_has_not_enabled_dashboard(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = self.run_hook(self.event(directory))
+            self.assertTrue(output["continue"])
+            self.assertNotIn("decision", output)
+            self.assertNotIn("systemMessage", output)
+            self.assertFalse(Path(directory, ".assumptions.html").exists())
+
     def test_blocks_once_then_accepts_valid_dashboard(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
+            Path(directory, ".assumptions.html").write_text(
+                self.dashboard("pending"), encoding="utf-8"
+            )
             first = self.run_hook(self.event(directory))
             self.assertEqual(first["decision"], "block")
+            self.assertIn("do not acknowledge this hook message", first["reason"])
             token = self.token_from(first)
             Path(directory, ".assumptions.html").write_text(
                 self.dashboard(token), encoding="utf-8"
@@ -67,6 +80,9 @@ class StopHookTests(unittest.TestCase):
 
     def test_invalid_dashboard_gets_one_repair_then_fails_open(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
+            Path(directory, ".assumptions.html").write_text(
+                self.dashboard("pending"), encoding="utf-8"
+            )
             first = self.run_hook(self.event(directory))
             token = self.token_from(first)
             Path(directory, ".assumptions.html").write_text(

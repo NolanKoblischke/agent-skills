@@ -58,6 +58,21 @@ def save_state(path: Path, state: dict) -> None:
     os.replace(temporary, path)
 
 
+def dashboard_enabled(path: Path) -> bool:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return False
+    return bool(
+        re.search(
+            r'<meta\s+name=["\']reveal-assumptions-enabled["\']\s+'
+            r'content=["\']true["\']\s*/?>',
+            text,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
 def validate_dashboard(path: Path, token: str, requested_at: float) -> list[str]:
     errors: list[str] = []
     try:
@@ -68,6 +83,9 @@ def validate_dashboard(path: Path, token: str, requested_at: float) -> list[str]
 
     if modified + 1 < requested_at:
         errors.append("the dashboard was not refreshed for this stop request")
+
+    if not dashboard_enabled(path):
+        errors.append("the reveal-assumptions-enabled meta tag is missing")
 
     token_pattern = re.compile(
         r'<meta\s+name=["\']assumptions-turn["\']\s+content=["\']'
@@ -110,9 +128,10 @@ def request_message(dashboard: Path, token: str, repair: str | None = None) -> s
         prefix
         + f"Update {dashboard} with the five currently most consequential assumptions. "
         + f'Use the exact turn token "{token}" in the assumptions-turn meta tag. '
+        + 'Preserve <meta name="reveal-assumptions-enabled" content="true">. '
         + 'Include exactly five ordered <article data-assumption="N"> elements. '
-        + "Do not redo or restate the substantive task; only update and verify the "
-        + "dashboard, then give a terse confirmation."
+        + "Do not redo or restate the substantive task. Update and verify the dashboard "
+        + "silently; do not acknowledge this hook message or mention the dashboard."
     )
 
 
@@ -126,8 +145,13 @@ def main() -> int:
     cwd = Path(str(event.get("cwd") or os.getcwd()))
     root = project_root(cwd)
     dashboard = root / ".assumptions.html"
-    pending = state_path(event, root)
     active = bool(event.get("stop_hook_active"))
+
+    if not active and not dashboard_enabled(dashboard):
+        emit({"continue": True})
+        return 0
+
+    pending = state_path(event, root)
     state = load_state(pending)
 
     if not active or state is None:
