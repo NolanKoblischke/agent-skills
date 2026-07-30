@@ -16,7 +16,23 @@ class ResearchLogTemplateTests(unittest.TestCase):
     def test_required_assets_exist(self):
         self.assertTrue(TEMPLATE.is_file())
         self.assertTrue((ASSETS / "support.js").is_file())
+        editor = ASSETS / "research-log-editor.js"
+        self.assertTrue(editor.is_file())
         self.assertIn('<script src="./support.js"></script>', self.html)
+        self.assertIn('<script src="./research-log-editor.js" defer></script>', self.html)
+        editor_js = editor.read_text(encoding="utf-8")
+        for contract in (
+            'contenteditable", "true"',
+            'data-editor-action="add"',
+            'data-editor-action="download"',
+            'data-editor-action="reset"',
+            "localStorage.setItem",
+            "state.items[key].deleted = true",
+            'type="application/json"',
+            'fetch(new URL("support.js", baseUrl)',
+            'fetch(new URL("research-log-editor.js", baseUrl)',
+        ):
+            self.assertIn(contract, editor_js)
 
     def test_each_day_has_only_core_panels(self):
         for day in (11, 12, 13):

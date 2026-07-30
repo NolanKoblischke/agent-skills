@@ -1,6 +1,6 @@
 {
   "name": "@nolankoblischke/agent-skills",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": true,
   "description": "Assumption auditing and evidence-based research notebook skills for Claude Code and Codex.",
   "type": "module",

@@ -65,7 +65,11 @@ explicitly asks for them.
 - Present each entry through exactly three horizontal tabs labeled
   `Work performed`, `Assumptions`, and `Next Steps`. Select `Work performed`
   by default and return to it whenever the user changes days.
-- Keep the notebook and `support.js` adjacent in the output directory.
+- Keep the notebook, `support.js`, and `research-log-editor.js` adjacent in the
+  output directory.
+- Preserve the browser editing layer: users must be able to edit text, delete
+  or add items, autosave changes locally, reset edits, and download an HTML copy
+  containing their changes.
 - Replace example names, dates, paths, project details, and scientific claims.
 - Do not expose secrets, credentials, private identifiers, or unnecessary
   machine-specific paths.
