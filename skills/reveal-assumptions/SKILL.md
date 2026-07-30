@@ -7,6 +7,8 @@ description: Maintain a live HTML dashboard of the five implicit assumptions or 
 
 Audit this completed work and list every implicit assumption or unstated decision you made, explain why you made it, note reasonable alternatives, and conclude by identifying the top-5 assumptions most likely to affect correctness or require user review.
 
+Actively identify choices made without direct evidence that they preserve the user’s intended outcome, and prioritize those most likely to change the result if wrong.
+
 Audit the work completed in the current turn and the project's current state.
 Update `.assumptions.html` at the project root before finishing.
 
