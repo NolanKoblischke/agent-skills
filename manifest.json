@@ -1,10 +1,19 @@
 {
   "name": "nolan-koblischke",
-  "version": "0.2.2",
-  "description": "Assumption auditing and evidence-based research notebooks for ongoing agent projects.",
+  "version": "0.3.0",
+  "description": "Audience-aware assumption auditing and evidence-based research notebooks for agent projects.",
   "repository": "https://github.com/NolanKoblischke/agent-skills",
   "generated": "Run `npm run build` to regenerate. Do not edit by hand.",
   "skills": [
+    {
+      "name": "know-your-audience",
+      "path": "skills/know-your-audience",
+      "description": "Interview a scientist about one audience and add a register for it to their personal communication skill — creating that skill if it does not exist yet. Use whenever someone is defining a new audience, joining a new collaboration, taking on a new role, or says \"create a communication skill for X\", \"define how the agent writes for Y working group\", \"add my advisor as an audience\", \"set up a reader profile for my student\", \"define my audience\", \"set up how you talk to me\". Also use to re-interview and update an audience already on file.",
+      "plugins": [
+        "audience-aware-skills",
+        "research-log"
+      ]
+    },
     {
       "name": "research-log",
       "path": "skills/research-log",
@@ -16,7 +25,7 @@
     {
       "name": "reveal-assumptions",
       "path": "skills/reveal-assumptions",
-      "description": "Maintain a live HTML dashboard of the five implicit assumptions or unstated decisions most likely to affect correctness or require user review. Use when a Stop hook requests an assumption audit, when updating .assumptions.html, or when the user asks to reveal, rank, monitor, or review assumptions during an ongoing project.",
+      "description": "Audit completed work and maintain an HTML dashboard of the five implicit assumptions or unstated decisions most likely to affect correctness or require user review. Use when updating .assumptions.html or when the user asks to reveal, rank, monitor, or review assumptions in completed work or an ongoing project.",
       "plugins": [
         "research-log",
         "reveal-assumptions"
@@ -26,27 +35,40 @@
   "plugins": [
     {
       "name": "reveal-assumptions",
-      "description": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
+      "description": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
       "skills": [
         "reveal-assumptions"
       ],
       "dependencies": [],
       "requires": [],
-      "hasHooks": true,
+      "hasHooks": false,
+      "hasAgents": false
+    },
+    {
+      "name": "audience-aware-skills",
+      "description": "Interview a scientist about a reader and create a durable communication profile for that audience.",
+      "skills": [
+        "know-your-audience"
+      ],
+      "dependencies": [],
+      "requires": [],
+      "hasHooks": false,
       "hasAgents": false
     },
     {
       "name": "research-log",
-      "description": "Create and maintain a polished evidence-based HTML research notebook with daily work, ranked assumptions, and next steps. Bundles reveal-assumptions and its opt-in Stop hook.",
+      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
       "skills": [
+        "know-your-audience",
         "research-log",
         "reveal-assumptions"
       ],
       "dependencies": [
-        "reveal-assumptions"
+        "reveal-assumptions",
+        "audience-aware-skills"
       ],
       "requires": [],
-      "hasHooks": true,
+      "hasHooks": false,
       "hasAgents": false
     }
   ]

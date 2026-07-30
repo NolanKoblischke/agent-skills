@@ -1,7 +1,7 @@
 {
   "name": "research-log",
-  "version": "0.2.2",
-  "description": "Create and maintain a polished evidence-based HTML research notebook with daily work, ranked assumptions, and next steps. Bundles reveal-assumptions and its opt-in Stop hook.",
+  "version": "0.3.0",
+  "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
   "author": {
     "name": "Nolan Koblischke"
   },

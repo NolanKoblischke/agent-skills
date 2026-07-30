@@ -1,0 +1,23 @@
+{
+  "name": "audience-aware-skills",
+  "version": "0.3.0",
+  "description": "Interview a scientist about a reader and create a durable communication profile for that audience.",
+  "author": {
+    "name": "Nolan Koblischke"
+  },
+  "homepage": "https://github.com/NolanKoblischke/agent-skills",
+  "repository": "https://github.com/NolanKoblischke/agent-skills",
+  "license": "BSD-3-Clause",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Audience Aware Skills",
+    "shortDescription": "Use Audience Aware Skills in Codex.",
+    "longDescription": "Interview a scientist about a reader and create a durable communication profile for that audience.",
+    "developerName": "Nolan Koblischke",
+    "category": "Development",
+    "capabilities": [],
+    "defaultPrompt": [
+      "Help me use Audience Aware Skills."
+    ]
+  }
+}

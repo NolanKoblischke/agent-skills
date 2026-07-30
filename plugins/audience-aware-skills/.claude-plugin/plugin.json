@@ -1,7 +1,7 @@
 {
-  "name": "reveal-assumptions",
+  "name": "audience-aware-skills",
   "version": "0.3.0",
-  "description": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
+  "description": "Interview a scientist about a reader and create a durable communication profile for that audience.",
   "author": {
     "name": "Nolan Koblischke"
   },

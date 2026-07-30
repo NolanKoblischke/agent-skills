@@ -3,7 +3,8 @@
 Edit only the canonical sources:
 
 - `skills/reveal-assumptions/`
-- `hooks/reveal-assumptions/`
+- `skills/research-log/`
+- `skills/know-your-audience/`
 - `skills.config.json`
 - `scripts/`
 

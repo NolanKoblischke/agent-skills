@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "reveal-assumptions",
-      "description": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
+      "description": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
       "source": {
         "source": "local",
         "path": "./plugins/reveal-assumptions"
@@ -18,8 +18,21 @@
       "category": "Development"
     },
     {
+      "name": "audience-aware-skills",
+      "description": "Interview a scientist about a reader and create a durable communication profile for that audience.",
+      "source": {
+        "source": "local",
+        "path": "./plugins/audience-aware-skills"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Development"
+    },
+    {
       "name": "research-log",
-      "description": "Create and maintain a polished evidence-based HTML research notebook with daily work, ranked assumptions, and next steps. Bundles reveal-assumptions and its opt-in Stop hook.",
+      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
       "source": {
         "source": "local",
         "path": "./plugins/research-log"

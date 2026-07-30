@@ -4,18 +4,23 @@
     "name": "Nolan Koblischke"
   },
   "metadata": {
-    "description": "Assumption auditing and evidence-based research notebooks for ongoing agent projects.",
-    "version": "0.2.2"
+    "description": "Audience-aware assumption auditing and evidence-based research notebooks for agent projects.",
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "reveal-assumptions",
-      "description": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
+      "description": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
       "source": "./plugins/reveal-assumptions"
     },
     {
+      "name": "audience-aware-skills",
+      "description": "Interview a scientist about a reader and create a durable communication profile for that audience.",
+      "source": "./plugins/audience-aware-skills"
+    },
+    {
       "name": "research-log",
-      "description": "Create and maintain a polished evidence-based HTML research notebook with daily work, ranked assumptions, and next steps. Bundles reveal-assumptions and its opt-in Stop hook.",
+      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
       "source": "./plugins/research-log"
     }
   ]

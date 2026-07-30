@@ -17,18 +17,24 @@ terminal transcript or an exhaustive provenance dump.
    worktree, diffs, commits, tests, generated artifacts, existing notes, and
    user-supplied context. Do not claim work, results, or dates that the evidence
    does not support.
-3. Invoke the installed `reveal-assumptions` skill for the current project.
-   Read the ranked assumptions from the resulting project-root
-   `.assumptions.html`; do not independently invent a replacement assumptions
-   audit.
-4. Copy `assets/Research Notebook.dc.html` and its adjacent
-   `assets/support.js` when creating a new notebook. Treat the HTML as the
-   structural and visual source of truth, then replace its example project and
-   entry content with evidence from the current project.
-5. Update the newest daily entry and the project sidebar. Preserve earlier
+3. Delegate the assumptions audit to one subagent. Instruct it to use the
+   installed `reveal-assumptions` skill on the same user-identified evidence
+   and update the project-root `.assumptions.html`. If the platform has no
+   subagent capability, invoke `reveal-assumptions` directly instead. Read the
+   five ranked assumptions from the resulting dashboard; do not independently
+   replace its audit.
+4. If the user supplies or has already identified a relevant audience-profile
+   Markdown file, read it in full and apply its register to the notebook. If no
+   profile is available, continue in a clear, concise, neutral research style
+   without interrupting the workflow to request one.
+5. Copy `assets/Research Notebook.dc.html`, `assets/support.js`, and
+   `assets/research-log-editor.js` when creating a new notebook. Treat the HTML
+   as the structural and visual source of truth, then replace its example
+   project and entry content with evidence from the current project.
+6. Update the newest daily entry and the project sidebar. Preserve earlier
    entries unless correcting unsupported information. Keep entries ordered and
    keep the newest entry selected by default.
-6. Render or open the result in a browser and inspect every available day.
+7. Render or open the result in a browser and inspect every available day.
    Verify navigation, readable layout, and the absence of stale example text.
 
 ## Entry contract
@@ -39,8 +45,9 @@ Give every daily entry exactly these four elements:
 - **Work performed**: a compact account of what changed and what the evidence
   establishes;
 - **Assumptions**: the five ranked assumptions supplied by
-  `reveal-assumptions`, shortened only for readability without changing their
-  meaning or certainty;
+  `reveal-assumptions`, using only each assumption statement. Omit its evidence
+  and explanation, and shorten only for readability without changing meaning
+  or certainty;
 - **Next steps**: concrete unfinished work supported by the current state.
 
 Apply structural changes consistently to every day. If the user removes a
@@ -78,3 +85,5 @@ explicitly asks for them.
 
 - `assets/Research Notebook.dc.html`: approved visual and structural template.
 - `assets/support.js`: required local runtime for the `.dc.html` template.
+- `assets/research-log-editor.js`: browser editing, local autosave, and
+  self-contained HTML download support.

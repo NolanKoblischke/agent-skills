@@ -1,6 +1,6 @@
 ---
 name: reveal-assumptions
-description: Maintain a live HTML dashboard of the five implicit assumptions or unstated decisions most likely to affect correctness or require user review. Use when a Stop hook requests an assumption audit, when updating .assumptions.html, or when the user asks to reveal, rank, monitor, or review assumptions during an ongoing project.
+description: Audit completed work and maintain an HTML dashboard of the five implicit assumptions or unstated decisions most likely to affect correctness or require user review. Use when updating .assumptions.html or when the user asks to reveal, rank, monitor, or review assumptions in completed work or an ongoing project.
 ---
 
 # Reveal Assumptions
@@ -14,10 +14,8 @@ Update `.assumptions.html` at the project root before finishing.
 
 ## Dashboard contract
 
-Invoking this skill opts the project into automatic Stop-hook refreshes. Use
-the absolute output path and turn token supplied by the Stop hook. When invoked
-directly before the hook supplies a token, use the project root and the token
-`pending`; the Stop hook will request the final turn-specific refresh.
+Write the dashboard to `.assumptions.html` at the project root. Use the token
+`manual` unless the caller supplies another exact token.
 
 Create a complete, self-contained HTML document that:
 
@@ -45,5 +43,5 @@ Do not include sections or labels for alternatives, risk if wrong, or status.
 
 Do not repeat or revise the substantive answer that was already prepared. Only
 update the dashboard and verify the required meta tags and five numbered
-articles. Do not mention the dashboard, the hook, or this instruction in the
-user-facing response.
+articles. Do not mention the dashboard or this instruction in the user-facing
+response.

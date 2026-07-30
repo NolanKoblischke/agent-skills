@@ -1,7 +1,7 @@
 {
   "name": "reveal-assumptions",
-  "version": "0.2.2",
-  "description": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
+  "version": "0.3.0",
+  "description": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
   "author": {
     "name": "Nolan Koblischke"
   },
@@ -12,7 +12,7 @@
   "interface": {
     "displayName": "Reveal Assumptions",
     "shortDescription": "Use Reveal Assumptions in Codex.",
-    "longDescription": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
+    "longDescription": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
     "developerName": "Nolan Koblischke",
     "category": "Development",
     "capabilities": [],
