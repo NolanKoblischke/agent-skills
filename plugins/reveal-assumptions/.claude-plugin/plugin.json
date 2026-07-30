@@ -1,6 +1,6 @@
 {
   "name": "reveal-assumptions",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
   "author": {
     "name": "Nolan Koblischke"

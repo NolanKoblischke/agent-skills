@@ -19,6 +19,14 @@
   a { color: #8C2F1F; text-decoration: none; }
   a:hover { color: #1C1A17; text-decoration: underline; }
   ol, ul { margin: 0; padding: 0; list-style: none; }
+  .entry-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid #8B8478; margin: 0 0 34px; }
+  .entry-tab { appearance: none; border: 0; background: transparent; color: #A39B8C; cursor: pointer; font: inherit; font-size: 18px; padding: 0 8px 12px; text-align: left; }
+  .entry-tab:hover { color: #4A443B; }
+  .entry-tab.active { border-bottom: 3px solid #8C2F1F; color: #1C1A17; font-weight: 500; margin-bottom: -2px; }
+  .entry-panel { max-width: 70ch; }
+  @media (max-width: 720px) {
+    .entry-tab { font-size: 14px; padding-left: 3px; padding-right: 3px; }
+  }
   @media print {
     body { background: #fff; }
     aside { display: none !important; }
@@ -100,6 +108,15 @@
       </div>
     </header>
 
+    <nav class="entry-tabs" role="tablist" aria-label="Research entry sections">
+      <sc-if value="{{ isWork }}"><button type="button" class="entry-tab active" role="tab" aria-selected="true">Work performed</button></sc-if>
+      <sc-if value="{{ notWork }}"><button type="button" class="entry-tab" role="tab" aria-selected="false" onClick="{{ goWork }}">Work performed</button></sc-if>
+      <sc-if value="{{ isAssumptions }}"><button type="button" class="entry-tab active" role="tab" aria-selected="true">Assumptions</button></sc-if>
+      <sc-if value="{{ notAssumptions }}"><button type="button" class="entry-tab" role="tab" aria-selected="false" onClick="{{ goAssumptions }}">Assumptions</button></sc-if>
+      <sc-if value="{{ isNext }}"><button type="button" class="entry-tab active" role="tab" aria-selected="true">Next Steps</button></sc-if>
+      <sc-if value="{{ notNext }}"><button type="button" class="entry-tab" role="tab" aria-selected="false" onClick="{{ goNextSection }}">Next Steps</button></sc-if>
+    </nav>
+
     <sc-if value="{{ is13 }}" hint-placeholder-val="{{ true }}">
     <article id="day-13" style="margin-bottom:56px">
       <div style="display:flex; align-items:baseline; gap:16px; paddingBottom:12px; borderBottom:1px solid #1C1A17; margin-bottom:28px; flex-wrap:wrap">
@@ -107,10 +124,8 @@
         <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#6E675C">Tue 28 Jul 2026</span>
       </div>
 
-      <div style="display:grid; gridTemplateColumns:150px 1fr; gap:26px 34px">
-
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Work performed</div>
-        <div>
+      <sc-if value="{{ isWork }}">
+        <section class="entry-panel" data-panel="work">
           <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Spent the morning on the Sector 30 scattered-light problem. Fitted a per-camera background model to the 2 400 lowest-flux pixels of each FFI cutout rather than a single median value, then re-extracted light curves for the 71 targets that fall in the affected CCDs. Residual straylight amplitude drops from ~1 800 e⁻/s to ~240 e⁻/s across the perigee passage, which is finally below the eclipse depths I care about.</p>
           <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Afternoon: re-ran the BLS search on the corrected set and compared recovered periods against the SPOC two-minute targets that overlap my sample (n = 34) as a sanity check. Agreement is good — 31/34 within 0.1%. Started writing the injection-recovery harness so completeness can be quantified properly instead of by hand-waving.</p>
           <ul style="display:flex; flex-direction:column; gap:6px; margin:0">
@@ -118,10 +133,11 @@
             <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Cross-match against SPOC 2-min sample, 34 overlapping targets</span></li>
             <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Skeleton of <span style="font-family:'IBM Plex Mono',monospace; font-size:13px">inject_recover.py</span> — signal injection done, recovery loop not yet</span></li>
           </ul>
-        </div>
+        </section>
+      </sc-if>
 
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Assumptions</div>
-        <ol style="display:flex; flex-direction:column; gap:14px">
+      <sc-if value="{{ isAssumptions }}">
+        <ol class="entry-panel" data-panel="assumptions" style="display:flex; flex-direction:column; gap:14px">
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
@@ -141,17 +157,18 @@
             </div>
           </li>
         </ol>
+      </sc-if>
 
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Next steps</div>
-        <div>
+      <sc-if value="{{ isNext }}">
+        <section class="entry-panel" data-panel="next">
           <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Finish the recovery loop in <span style="font-family:'IBM Plex Mono',monospace; font-size:13px">inject_recover.py</span>; 10 000 injections across the T–P grid.</span></li>
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Add a 2P/½P check to the BLS post-processing and re-fold the 3 discrepant targets.</span></li>
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Pull Gaia DR3 neighbour counts within 21″ to bound the blending in A3.</span></li>
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Ask about dropping Sector 30 vs. keeping the flagged 9 targets.</span></li>
           </ul>
-        </div>
-      </div>
+        </section>
+      </sc-if>
     </article>
     </sc-if>
 
@@ -162,15 +179,15 @@
         <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#6E675C">Mon 27 Jul 2026</span>
       </div>
 
-      <div style="display:grid; gridTemplateColumns:150px 1fr; gap:26px 34px">
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Work performed</div>
-        <div>
+      <sc-if value="{{ isWork }}">
+        <section class="entry-panel" data-panel="work">
           <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">First full BLS run over the whole 412-target sample. Period grid 0.1–27 d, uniform in log period, 1 400 phase bins. Total 52 min on 40 cores. Wrote the peak-extraction step (top five peaks per target with their SDE) and a first-pass automated cut at SDE &gt; 8, which keeps 289 targets.</p>
           <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Phase-folded 40 of them by hand to see what the cut is actually letting through. Most look like genuine eclipses; roughly a fifth are clearly folded at twice the true period, and a handful are pulsators that BLS is happy to call a box.</p>
-        </div>
+        </section>
+      </sc-if>
 
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Assumptions</div>
-        <ol style="display:flex; flex-direction:column; gap:14px">
+      <sc-if value="{{ isAssumptions }}">
+        <ol class="entry-panel" data-panel="assumptions" style="display:flex; flex-direction:column; gap:14px">
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
@@ -184,16 +201,17 @@
             </div>
           </li>
         </ol>
+      </sc-if>
 
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Next steps</div>
-        <div>
+      <sc-if value="{{ isNext }}">
+        <section class="entry-panel" data-panel="next">
           <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Fix the Sector 30 background before trusting any of these detections.</span></li>
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Cross-check against SPOC two-minute targets.</span></li>
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span style="color:#1C1A17">Build the injection-recovery harness — carried to Day 13.</span></li>
           </ul>
-        </div>
-      </div>
+        </section>
+      </sc-if>
     </article>
     </sc-if>
 
@@ -204,15 +222,15 @@
         <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#6E675C">Fri 24 Jul 2026</span>
       </div>
 
-      <div style="display:grid; gridTemplateColumns:150px 1fr; gap:26px 34px">
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Work performed</div>
-        <div>
+      <sc-if value="{{ isWork }}">
+        <section class="entry-panel" data-panel="work">
           <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Finished the aperture-selection study. For each target I extracted light curves through nine circular apertures (r = 1.0–3.0 px in 0.25 px steps) and picked the one minimising the point-to-point scatter of the out-of-eclipse flux. Optimum sits at r ≈ 1.75 px for T = 13–14 and r ≈ 1.25 px for T = 14–15, as expected from the sky-noise argument.</p>
           <p style="margin:0; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Also wrote the quality-flag mask (spacecraft momentum dumps, Earth/Moon crossings) and confirmed against the sector data-release notes that I am removing the right cadences and not more.</p>
-        </div>
+        </section>
+      </sc-if>
 
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Assumptions</div>
-        <ol style="display:flex; flex-direction:column; gap:14px">
+      <sc-if value="{{ isAssumptions }}">
+        <ol class="entry-panel" data-panel="assumptions" style="display:flex; flex-direction:column; gap:14px">
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
@@ -226,15 +244,16 @@
             </div>
           </li>
         </ol>
+      </sc-if>
 
-        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Next steps</div>
-        <div>
+      <sc-if value="{{ isNext }}">
+        <section class="entry-panel" data-panel="next">
           <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Freeze photometry v3 and run the first full BLS search.</span></li>
             <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Decide a provisional detection threshold.</span></li>
           </ul>
-        </div>
-      </div>
+        </section>
+      </sc-if>
     </article>
     </sc-if>
 
@@ -257,19 +276,27 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { day: 13 };
+  state = { day: 13, section: 'work' };
   go(d) {
-    this.setState({ day: d });
+    this.setState({ day: d, section: 'work' });
     if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+  show(section) { this.setState({ section }); }
   renderVals() {
     const d = this.state.day;
+    const section = this.state.section;
     return {
       is11: d === 11, is12: d === 12, is13: d === 13,
       not11: d !== 11, not12: d !== 12, not13: d !== 13,
+      isWork: section === 'work', notWork: section !== 'work',
+      isAssumptions: section === 'assumptions', notAssumptions: section !== 'assumptions',
+      isNext: section === 'next', notNext: section !== 'next',
       hasPrev: d > 11, hasNext: d < 13,
       prevLabel: d === 13 ? 'Day 12 · Mon 27 Jul' : 'Day 11 · Fri 24 Jul',
       nextLabel: d === 11 ? 'Day 12 · Mon 27 Jul' : 'Day 13 · Tue 28 Jul',
+      goWork: () => this.show('work'),
+      goAssumptions: () => this.show('assumptions'),
+      goNextSection: () => this.show('next'),
       go11: () => this.go(11), go12: () => this.go(12), go13: () => this.go(13),
       goPrev: () => this.go(Math.max(11, d - 1)),
       goNext: () => this.go(Math.min(13, d + 1))

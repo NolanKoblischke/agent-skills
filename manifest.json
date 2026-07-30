@@ -1,6 +1,6 @@
 {
   "name": "nolan-koblischke",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Assumption auditing and evidence-based research notebooks for ongoing agent projects.",
   "repository": "https://github.com/NolanKoblischke/agent-skills",
   "generated": "Run `npm run build` to regenerate. Do not edit by hand.",

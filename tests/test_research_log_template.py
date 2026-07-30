@@ -18,7 +18,7 @@ class ResearchLogTemplateTests(unittest.TestCase):
         self.assertTrue((ASSETS / "support.js").is_file())
         self.assertIn('<script src="./support.js"></script>', self.html)
 
-    def test_each_day_has_only_core_sections(self):
+    def test_each_day_has_only_core_panels(self):
         for day in (11, 12, 13):
             match = re.search(
                 rf'<article id="day-{day}".*?</article>',
@@ -27,8 +27,8 @@ class ResearchLogTemplateTests(unittest.TestCase):
             )
             self.assertIsNotNone(match, f"missing Day {day}")
             entry = match.group(0)
-            for section in ("Work performed", "Assumptions", "Next steps"):
-                self.assertEqual(entry.count(f">{section}<"), 1)
+            for panel in ("work", "assumptions", "next"):
+                self.assertEqual(entry.count(f'data-panel="{panel}"'), 1)
             for removed in (
                 "Worked / didn't",
                 "Provenance",
@@ -38,6 +38,15 @@ class ResearchLogTemplateTests(unittest.TestCase):
                 ">Current<",
             ):
                 self.assertNotIn(removed, entry)
+
+    def test_exact_tab_labels_and_state_contract(self):
+        for label in ("Work performed", "Assumptions", "Next Steps"):
+            self.assertEqual(self.html.count(f">{label}</button>"), 2)
+        self.assertIn('role="tablist"', self.html)
+        self.assertIn("state = { day: 13, section: 'work' }", self.html)
+        self.assertIn("this.setState({ day: d, section: 'work' })", self.html)
+        self.assertIn("goAssumptions: () => this.show('assumptions')", self.html)
+        self.assertIn("goNextSection: () => this.show('next')", self.html)
 
     def test_removed_global_example_sections_stay_removed(self):
         for removed in (
