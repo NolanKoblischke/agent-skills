@@ -1,13 +1,14 @@
 # AGENTS.md
 
-This repository packages one canonical `reveal-assumptions` skill and one
-`Stop` hook for Claude Code and Codex.
+This repository packages canonical `reveal-assumptions` and `research-log`
+skills plus one `Stop` hook for Claude Code and Codex.
 
 ## Source of truth
 
 - `skills/reveal-assumptions/` contains the skill.
+- `skills/research-log/` contains the research notebook skill and template.
 - `hooks/reveal-assumptions/` contains the sole lifecycle hook.
-- `skills.config.json` declares the single plugin.
+- `skills.config.json` declares both plugins and their dependency closure.
 - `scripts/build.mjs` generates both marketplace formats and self-contained
   plugin packages.
 

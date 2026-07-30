@@ -4,14 +4,19 @@
     "name": "Nolan Koblischke"
   },
   "metadata": {
-    "description": "A live assumption dashboard for ongoing agent projects.",
-    "version": "0.1.2"
+    "description": "Assumption auditing and evidence-based research notebooks for ongoing agent projects.",
+    "version": "0.2.0"
   },
   "plugins": [
     {
       "name": "reveal-assumptions",
       "description": "Maintain a live project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review. A Stop hook refreshes and validates the dashboard before each assistant turn ends.",
       "source": "./plugins/reveal-assumptions"
+    },
+    {
+      "name": "research-log",
+      "description": "Create and maintain a polished evidence-based HTML research notebook with daily work, ranked assumptions, and next steps. Bundles reveal-assumptions and its opt-in Stop hook.",
+      "source": "./plugins/research-log"
     }
   ]
 }

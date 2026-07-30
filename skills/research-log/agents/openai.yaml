@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Log"
+  short_description: "Build evidence-based daily research notebooks"
+  default_prompt: "Use $research-log to create or update my project research notebook."

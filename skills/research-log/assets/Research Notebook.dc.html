@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="omelette-owns-print" content="true">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #F4F1EA; }
+  body { font-family: "Spectral", Georgia, serif; color: #1C1A17; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  a { color: #8C2F1F; text-decoration: none; }
+  a:hover { color: #1C1A17; text-decoration: underline; }
+  ol, ul { margin: 0; padding: 0; list-style: none; }
+  @media print {
+    body { background: #fff; }
+    aside { display: none !important; }
+  }
+</style>
+</helmet>
+<div style="display:flex; align-items:flex-start; gap:0; background:#F4F1EA; min-height:100vh">
+
+  <aside style="width:286px; flex:none; position:sticky; top:0; align-self:flex-start; height:100vh; overflow:auto; padding:44px 30px 40px; borderRight:1px solid #DCD5C7; background:#EFEBE2">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#8C2F1F; margin-bottom:8px">Research Notebook</div>
+    <div style="font-size:19px; line-height:1.25; font-weight:500; letter-spacing:-0.01em; margin-bottom:30px">Faint Eclipsing Binaries in TESS Full-Frame Images</div>
+
+    <div style="display:flex; flex-direction:column; gap:7px; font-size:13px; color:#4A443B; padding-bottom:22px; borderBottom:1px solid #DCD5C7; margin-bottom:22px">
+      <div>J. Okonkwo</div>
+    </div>
+
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#8B8478; margin-bottom:12px">Where the project is</div>
+    <ol style="display:flex; flex-direction:column; gap:0; margin-bottom:26px">
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#3F6B4A; width:12px; flex:none; line-height:1.5">✓</span>
+        <span style="font-size:13px; color:#6E675C; line-height:1.5">Sample selection — 412 candidates</span>
+      </li>
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#3F6B4A; width:12px; flex:none; line-height:1.5">✓</span>
+        <span style="font-size:13px; color:#6E675C; line-height:1.5">FFI difference photometry</span>
+      </li>
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0; background:#E4DED1; margin:2px -10px; paddingLeft:10px; paddingRight:10px; borderRadius:2px">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; width:12px; flex:none; line-height:1.5">▸</span>
+        <span style="font-size:13px; color:#1C1A17; line-height:1.5; font-weight:500">Period search &amp; injection tests</span>
+      </li>
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; width:12px; flex:none; line-height:1.5">○</span>
+        <span style="font-size:13px; color:#A39B8C; line-height:1.5">Eyeball vetting of phase folds</span>
+      </li>
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; width:12px; flex:none; line-height:1.5">○</span>
+        <span style="font-size:13px; color:#A39B8C; line-height:1.5">Completeness-corrected occurrence</span>
+      </li>
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; width:12px; flex:none; line-height:1.5">○</span>
+        <span style="font-size:13px; color:#A39B8C; line-height:1.5">Draft for group meeting, 21 Aug</span>
+      </li>
+    </ol>
+
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#8B8478; margin-bottom:10px">Entries</div>
+    <div style="display:flex; flex-direction:column; gap:2px">
+      <sc-if value="{{ not11 }}">
+        <div onClick="{{ go11 }}" style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6E675C; padding:6px 10px; margin:0 -10px; cursor:pointer; borderRadius:2px" style-hover="background:#E4DED1; color:#8C2F1F"><span>Day 11</span><span style="color:#A39B8C">Fri 24 Jul</span></div>
+      </sc-if>
+      <sc-if value="{{ is11 }}">
+        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1C1A17; font-weight:600; padding:6px 10px; margin:0 -10px; background:#E4DED1; borderRadius:2px"><span>Day 11</span><span style="color:#8C2F1F">Fri 24 Jul</span></div>
+      </sc-if>
+      <sc-if value="{{ not12 }}">
+        <div onClick="{{ go12 }}" style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6E675C; padding:6px 10px; margin:0 -10px; cursor:pointer; borderRadius:2px" style-hover="background:#E4DED1; color:#8C2F1F"><span>Day 12</span><span style="color:#A39B8C">Mon 27 Jul</span></div>
+      </sc-if>
+      <sc-if value="{{ is12 }}">
+        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1C1A17; font-weight:600; padding:6px 10px; margin:0 -10px; background:#E4DED1; borderRadius:2px"><span>Day 12</span><span style="color:#8C2F1F">Mon 27 Jul</span></div>
+      </sc-if>
+      <sc-if value="{{ not13 }}">
+        <div onClick="{{ go13 }}" style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6E675C; padding:6px 10px; margin:0 -10px; cursor:pointer; borderRadius:2px" style-hover="background:#E4DED1; color:#8C2F1F"><span>Day 13</span><span style="color:#A39B8C">Tue 28 Jul</span></div>
+      </sc-if>
+      <sc-if value="{{ is13 }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1C1A17; font-weight:600; padding:6px 10px; margin:0 -10px; background:#E4DED1; borderRadius:2px"><span>Day 13</span><span style="color:#8C2F1F">Tue 28 Jul</span></div>
+      </sc-if>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; padding:6px 0">Days 1–10 · archived</div>
+    </div>
+
+  </aside>
+
+  <main style="flex:1; min-width:0; padding:56px 68px 120px; maxWidth:1000px">
+
+    <header style="paddingBottom:30px; borderBottom:2px solid #1C1A17; margin-bottom:52px; display:flex; alignItems:flex-end; justify-content:space-between; gap:40px; flex-wrap:wrap">
+      <div>
+        <h1 style="font-size:38px; line-height:1.1; font-weight:400; letter-spacing:-0.02em; margin:0">Daily research log</h1>
+      </div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8B8478; textAlign:right; lineHeight:1.9">
+        <div>Weeks 2–3 · 24–28 Jul 2026</div>
+        <div>Last edited 28 Jul, 19:40</div>
+      </div>
+    </header>
+
+    <sc-if value="{{ is13 }}" hint-placeholder-val="{{ true }}">
+    <article id="day-13" style="margin-bottom:56px">
+      <div style="display:flex; align-items:baseline; gap:16px; paddingBottom:12px; borderBottom:1px solid #1C1A17; margin-bottom:28px; flex-wrap:wrap">
+        <h2 style="font-size:26px; font-weight:500; letter-spacing:-0.01em; margin:0">Day 13</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#6E675C">Tue 28 Jul 2026</span>
+      </div>
+
+      <div style="display:grid; gridTemplateColumns:150px 1fr; gap:26px 34px">
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Work performed</div>
+        <div>
+          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Spent the morning on the Sector 30 scattered-light problem. Fitted a per-camera background model to the 2 400 lowest-flux pixels of each FFI cutout rather than a single median value, then re-extracted light curves for the 71 targets that fall in the affected CCDs. Residual straylight amplitude drops from ~1 800 e⁻/s to ~240 e⁻/s across the perigee passage, which is finally below the eclipse depths I care about.</p>
+          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Afternoon: re-ran the BLS search on the corrected set and compared recovered periods against the SPOC two-minute targets that overlap my sample (n = 34) as a sanity check. Agreement is good — 31/34 within 0.1%. Started writing the injection-recovery harness so completeness can be quantified properly instead of by hand-waving.</p>
+          <ul style="display:flex; flex-direction:column; gap:6px; margin:0">
+            <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Re-extraction of 71 Sector 30 light curves (3.1 h wall clock, 40 cores)</span></li>
+            <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Cross-match against SPOC 2-min sample, 34 overlapping targets</span></li>
+            <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Skeleton of <span style="font-family:'IBM Plex Mono',monospace; font-size:13px">inject_recover.py</span> — signal injection done, recovery loop not yet</span></li>
+          </ul>
+        </div>
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Assumptions</div>
+        <ol style="display:flex; flex-direction:column; gap:14px">
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">The scattered-light background is spatially smooth on the scale of a 15 × 15 px cutout, so a single low-order surface per cutout is sufficient.</div>
+            </div>
+          </li>
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">SPOC two-minute periods are treated as ground truth for the cross-check.</div>
+            </div>
+          </li>
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A3</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">Blending from neighbours brighter than T = 16 is negligible after difference imaging.</div>
+            </div>
+          </li>
+        </ol>
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Next steps</div>
+        <div>
+          <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Finish the recovery loop in <span style="font-family:'IBM Plex Mono',monospace; font-size:13px">inject_recover.py</span>; 10 000 injections across the T–P grid.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Add a 2P/½P check to the BLS post-processing and re-fold the 3 discrepant targets.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Pull Gaia DR3 neighbour counts within 21″ to bound the blending in A3.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Ask about dropping Sector 30 vs. keeping the flagged 9 targets.</span></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    </sc-if>
+
+    <sc-if value="{{ is12 }}">
+    <article id="day-12" style="margin-bottom:56px">
+      <div style="display:flex; align-items:baseline; gap:16px; paddingBottom:12px; borderBottom:1px solid #1C1A17; margin-bottom:28px; flex-wrap:wrap">
+        <h2 style="font-size:26px; font-weight:500; letter-spacing:-0.01em; margin:0">Day 12</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#6E675C">Mon 27 Jul 2026</span>
+      </div>
+
+      <div style="display:grid; gridTemplateColumns:150px 1fr; gap:26px 34px">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Work performed</div>
+        <div>
+          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">First full BLS run over the whole 412-target sample. Period grid 0.1–27 d, uniform in log period, 1 400 phase bins. Total 52 min on 40 cores. Wrote the peak-extraction step (top five peaks per target with their SDE) and a first-pass automated cut at SDE &gt; 8, which keeps 289 targets.</p>
+          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Phase-folded 40 of them by hand to see what the cut is actually letting through. Most look like genuine eclipses; roughly a fifth are clearly folded at twice the true period, and a handful are pulsators that BLS is happy to call a box.</p>
+        </div>
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Assumptions</div>
+        <ol style="display:flex; flex-direction:column; gap:14px">
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">SDE &gt; 8 is an acceptable detection threshold.</div>
+            </div>
+          </li>
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">A 27 d upper period limit is fine because a single sector cannot constrain anything longer.</div>
+            </div>
+          </li>
+        </ol>
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Next steps</div>
+        <div>
+          <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Fix the Sector 30 background before trusting any of these detections.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Cross-check against SPOC two-minute targets.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span style="color:#1C1A17">Build the injection-recovery harness — carried to Day 13.</span></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    </sc-if>
+
+    <sc-if value="{{ is11 }}">
+    <article id="day-11" style="margin-bottom:56px">
+      <div style="display:flex; align-items:baseline; gap:16px; paddingBottom:12px; borderBottom:1px solid #1C1A17; margin-bottom:28px; flex-wrap:wrap">
+        <h2 style="font-size:26px; font-weight:500; letter-spacing:-0.01em; margin:0">Day 11</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#6E675C">Fri 24 Jul 2026</span>
+      </div>
+
+      <div style="display:grid; gridTemplateColumns:150px 1fr; gap:26px 34px">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Work performed</div>
+        <div>
+          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Finished the aperture-selection study. For each target I extracted light curves through nine circular apertures (r = 1.0–3.0 px in 0.25 px steps) and picked the one minimising the point-to-point scatter of the out-of-eclipse flux. Optimum sits at r ≈ 1.75 px for T = 13–14 and r ≈ 1.25 px for T = 14–15, as expected from the sky-noise argument.</p>
+          <p style="margin:0; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Also wrote the quality-flag mask (spacecraft momentum dumps, Earth/Moon crossings) and confirmed against the sector data-release notes that I am removing the right cadences and not more.</p>
+        </div>
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Assumptions</div>
+        <ol style="display:flex; flex-direction:column; gap:14px">
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">Minimising point-to-point scatter is a fair proxy for maximising eclipse S/N.</div>
+            </div>
+          </li>
+          <li style="display:flex; gap:14px; align-items:flex-start">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
+            <div>
+              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">The TESS PSF is constant across a single 15 × 15 px cutout.</div>
+            </div>
+          </li>
+        </ol>
+
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#8B8478; paddingTop:5px">Next steps</div>
+        <div>
+          <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Freeze photometry v3 and run the first full BLS search.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Decide a provisional detection threshold.</span></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+    </sc-if>
+
+    <nav style="paddingTop:22px; borderTop:1px solid #DCD5C7; display:flex; justify-content:space-between; align-items:center; gap:24px">
+      <sc-if value="{{ hasPrev }}" hint-placeholder-val="{{ true }}">
+        <div onClick="{{ goPrev }}" style="cursor:pointer; display:flex; flex-direction:column; gap:3px; padding:8px 14px; margin:0 -14px; borderRadius:2px" style-hover="background:#EFEBE2">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#A39B8C">← Previous entry</span>
+          <span style="font-size:15px; color:#1C1A17">{{ prevLabel }}</span>
+        </div>
+      </sc-if>
+      <sc-if value="{{ hasNext }}">
+        <div onClick="{{ goNext }}" style="cursor:pointer; display:flex; flex-direction:column; gap:3px; padding:8px 14px; margin:0 -14px; borderRadius:2px; marginLeft:auto; textAlign:right" style-hover="background:#EFEBE2">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:#A39B8C">Next entry →</span>
+          <span style="font-size:15px; color:#1C1A17">{{ nextLabel }}</span>
+        </div>
+      </sc-if>
+    </nav>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { day: 13 };
+  go(d) {
+    this.setState({ day: d });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  renderVals() {
+    const d = this.state.day;
+    return {
+      is11: d === 11, is12: d === 12, is13: d === 13,
+      not11: d !== 11, not12: d !== 12, not13: d !== 13,
+      hasPrev: d > 11, hasNext: d < 13,
+      prevLabel: d === 13 ? 'Day 12 · Mon 27 Jul' : 'Day 11 · Fri 24 Jul',
+      nextLabel: d === 11 ? 'Day 12 · Mon 27 Jul' : 'Day 13 · Tue 28 Jul',
+      go11: () => this.go(11), go12: () => this.go(12), go13: () => this.go(13),
+      goPrev: () => this.go(Math.max(11, d - 1)),
+      goNext: () => this.go(Math.min(13, d + 1))
+    };
+  }
+}
+</script>
+</body>
+</html>

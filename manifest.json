@@ -1,15 +1,24 @@
 {
   "name": "nolan-koblischke",
-  "version": "0.1.2",
-  "description": "A live assumption dashboard for ongoing agent projects.",
+  "version": "0.2.0",
+  "description": "Assumption auditing and evidence-based research notebooks for ongoing agent projects.",
   "repository": "https://github.com/NolanKoblischke/agent-skills",
   "generated": "Run `npm run build` to regenerate. Do not edit by hand.",
   "skills": [
+    {
+      "name": "research-log",
+      "path": "skills/research-log",
+      "description": "Create or update a polished HTML research notebook from dated project evidence, using the bundled notebook template and the reveal-assumptions skill for ranked assumptions. Use when the user asks for a research log, research notebook, lab notebook, daily project journal, ongoing HTML progress record, or a concise record of completed work, assumptions, and next steps.",
+      "plugins": [
+        "research-log"
+      ]
+    },
     {
       "name": "reveal-assumptions",
       "path": "skills/reveal-assumptions",
       "description": "Maintain a live HTML dashboard of the five implicit assumptions or unstated decisions most likely to affect correctness or require user review. Use when a Stop hook requests an assumption audit, when updating .assumptions.html, or when the user asks to reveal, rank, monitor, or review assumptions during an ongoing project.",
       "plugins": [
+        "research-log",
         "reveal-assumptions"
       ]
     }
@@ -22,6 +31,20 @@
         "reveal-assumptions"
       ],
       "dependencies": [],
+      "requires": [],
+      "hasHooks": true,
+      "hasAgents": false
+    },
+    {
+      "name": "research-log",
+      "description": "Create and maintain a polished evidence-based HTML research notebook with daily work, ranked assumptions, and next steps. Bundles reveal-assumptions and its opt-in Stop hook.",
+      "skills": [
+        "research-log",
+        "reveal-assumptions"
+      ],
+      "dependencies": [
+        "reveal-assumptions"
+      ],
       "requires": [],
       "hasHooks": true,
       "hasAgents": false
