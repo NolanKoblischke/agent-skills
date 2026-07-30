@@ -4,7 +4,7 @@
     "name": "nolan-koblischke",
     "displayName": "Nolan Koblischke Skills",
     "description": "Audience-aware assumption auditing and evidence-based research notebooks for agent projects.",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "repo": "NolanKoblischke/agent-skills",
     "owner": {
       "name": "Nolan Koblischke"
@@ -25,7 +25,7 @@
     },
     {
       "name": "research-log",
-      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
+      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, next steps, and ASTRA-linked results when available.",
       "skills": ["research-log"],
       "dependencies": ["reveal-assumptions", "audience-aware-skills"]
     }

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research Notebook</title>
 <script src="./support.js"></script>
 <script src="./research-log-editor.js" defer></script>
 </head>
@@ -25,50 +26,87 @@
   .entry-tab:hover { color: #4A443B; }
   .entry-tab.active { border-bottom: 3px solid #8C2F1F; color: #1C1A17; font-weight: 500; margin-bottom: -2px; }
   .entry-panel { max-width: 70ch; }
+  .research-figure { margin: 28px 0 30px; }
+  .research-figure a { display: block; }
+  .research-figure img {
+    display: block; width: 100%; height: auto; border: 1px solid #DCD5C7;
+    background: #FFFDF8;
+  }
+  .research-figure figcaption {
+    margin-top: 9px; color: #6E675C; font-size: 13px; line-height: 1.55;
+  }
+  .astra-value {
+    display: inline-flex; align-items: baseline; gap: .28em; color: #8C2F1F;
+    border-bottom: 1px dotted #8C2F1F; cursor: pointer; font-weight: 500;
+    white-space: nowrap; outline: none;
+  }
+  .astra-value::after { content: "↗"; font: 500 9px/1 "IBM Plex Mono", monospace; opacity: .65; }
+  .astra-value:hover, .astra-value:focus-visible, .astra-value[aria-expanded="true"] {
+    color: #1C1A17; border-bottom-style: solid;
+  }
+  .astra-popover {
+    position: fixed; z-index: 1000; width: min(340px, calc(100vw - 24px)); padding: 15px 16px;
+    background: #FFFDF8; border: 1px solid #CFC5B4; border-top: 3px solid #8C2F1F;
+    box-shadow: 0 12px 32px rgba(28,26,23,.16); border-radius: 2px;
+    font-family: "IBM Plex Mono", monospace; color: #4A443B;
+  }
+  .astra-popover[hidden] { display: none; }
+  .astra-popover-label { font: 500 10px/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: #8C2F1F; }
+  .astra-popover-value { margin: 5px 0 10px; font: 500 24px/1.15 "Spectral", Georgia, serif; color: #1C1A17; }
+  .astra-popover-row { display: grid; grid-template-columns: 64px 1fr; gap: 8px; margin-top: 6px; font-size: 10px; line-height: 1.5; overflow-wrap: anywhere; }
+  .astra-popover-key { color: #A39B8C; text-transform: uppercase; letter-spacing: .06em; }
+  .astra-popover-note { margin-top: 10px; padding-top: 9px; border-top: 1px solid #E4DED1; font: 12px/1.45 "Spectral", Georgia, serif; color: #4A443B; }
+  .astra-popover-hint { margin-top: 8px; color: #A39B8C; font-size: 9px; }
   @media (max-width: 720px) {
     .entry-tab { font-size: 14px; padding-left: 3px; padding-right: 3px; }
+    .notebook-shell { display: block !important; }
+    aside { position: relative !important; width: 100% !important; height: auto !important; }
+    main { padding: 38px 24px 90px !important; }
   }
   @media print {
     body { background: #fff; }
     aside { display: none !important; }
+    .astra-popover { display: none !important; }
+    .astra-value { color: inherit; border: 0; }
+    .astra-value::after { display: none; }
   }
 </style>
 </helmet>
-<div style="display:flex; align-items:flex-start; gap:0; background:#F4F1EA; min-height:100vh">
+<div class="notebook-shell" style="display:flex; align-items:flex-start; gap:0; background:#F4F1EA; min-height:100vh">
 
   <aside style="width:286px; flex:none; position:sticky; top:0; align-self:flex-start; height:100vh; overflow:auto; padding:44px 30px 40px; borderRight:1px solid #DCD5C7; background:#EFEBE2">
     <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:#8C2F1F; margin-bottom:8px">Research Notebook</div>
-    <div style="font-size:19px; line-height:1.25; font-weight:500; letter-spacing:-0.01em; margin-bottom:30px">Faint Eclipsing Binaries in TESS Full-Frame Images</div>
+    <div data-template-example="project-title" style="font-size:19px; line-height:1.25; font-weight:500; letter-spacing:-0.01em; margin-bottom:30px">Research project title</div>
 
     <div style="display:flex; flex-direction:column; gap:7px; font-size:13px; color:#4A443B; padding-bottom:22px; borderBottom:1px solid #DCD5C7; margin-bottom:22px">
-      <div>J. Okonkwo</div>
+      <div data-template-example="researcher-name">Researcher name</div>
     </div>
 
     <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#8B8478; margin-bottom:12px">Where the project is</div>
     <ol style="display:flex; flex-direction:column; gap:0; margin-bottom:26px">
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#3F6B4A; width:12px; flex:none; line-height:1.5">✓</span>
-        <span style="font-size:13px; color:#6E675C; line-height:1.5">Sample selection — 412 candidates</span>
+        <span data-template-example="phase" style="font-size:13px; color:#6E675C; line-height:1.5">Collect and inspect evidence</span>
       </li>
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#3F6B4A; width:12px; flex:none; line-height:1.5">✓</span>
-        <span style="font-size:13px; color:#6E675C; line-height:1.5">FFI difference photometry</span>
+        <span data-template-example="phase" style="font-size:13px; color:#6E675C; line-height:1.5">Prepare the analysis inputs</span>
       </li>
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0; background:#E4DED1; margin:2px -10px; paddingLeft:10px; paddingRight:10px; borderRadius:2px">
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; width:12px; flex:none; line-height:1.5">▸</span>
-        <span style="font-size:13px; color:#1C1A17; line-height:1.5; font-weight:500">Period search &amp; injection tests</span>
+        <span data-template-example="phase" style="font-size:13px; color:#1C1A17; line-height:1.5; font-weight:500">Review primary results</span>
       </li>
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; width:12px; flex:none; line-height:1.5">○</span>
-        <span style="font-size:13px; color:#A39B8C; line-height:1.5">Eyeball vetting of phase folds</span>
+        <span data-template-example="phase" style="font-size:13px; color:#A39B8C; line-height:1.5">Run sensitivity checks</span>
       </li>
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; width:12px; flex:none; line-height:1.5">○</span>
-        <span style="font-size:13px; color:#A39B8C; line-height:1.5">Completeness-corrected occurrence</span>
+        <span data-template-example="phase" style="font-size:13px; color:#A39B8C; line-height:1.5">Resolve open questions</span>
       </li>
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; width:12px; flex:none; line-height:1.5">○</span>
-        <span style="font-size:13px; color:#A39B8C; line-height:1.5">Draft for group meeting, 21 Aug</span>
+        <span data-template-example="phase" style="font-size:13px; color:#A39B8C; line-height:1.5">Prepare the next research update</span>
       </li>
     </ol>
 
@@ -127,13 +165,14 @@
 
       <sc-if value="{{ isWork }}">
         <section class="entry-panel" data-panel="work">
-          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Spent the morning on the Sector 30 scattered-light problem. Fitted a per-camera background model to the 2 400 lowest-flux pixels of each FFI cutout rather than a single median value, then re-extracted light curves for the 71 targets that fall in the affected CCDs. Residual straylight amplitude drops from ~1 800 e⁻/s to ~240 e⁻/s across the perigee passage, which is finally below the eclipse depths I care about.</p>
-          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Afternoon: re-ran the BLS search on the corrected set and compared recovered periods against the SPOC two-minute targets that overlap my sample (n = 34) as a sanity check. Agreement is good — 31/34 within 0.1%. Started writing the injection-recovery harness so completeness can be quantified properly instead of by hand-waving.</p>
-          <ul style="display:flex; flex-direction:column; gap:6px; margin:0">
-            <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Re-extraction of 71 Sector 30 light curves (3.1 h wall clock, 40 cores)</span></li>
-            <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Cross-match against SPOC 2-min sample, 34 overlapping targets</span></li>
-            <li style="display:flex; gap:10px; font-size:15px; line-height:1.6; color:#4A443B"><span style="color:#C4BCAB; flex:none">—</span><span>Skeleton of <span style="font-family:'IBM Plex Mono',monospace; font-size:13px">inject_recover.py</span> — signal injection done, recovery loop not yet</span></li>
-          </ul>
+          <p data-template-example="work-note" style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Completed the primary analysis and reviewed its generated artifacts. The baseline result uses <span class="astra-value" tabindex="0" role="button" contenteditable="false" data-template-example="astra-value" data-astra-label="Analyzed records" data-astra-path="outputs.primary_results.metrics.sample_count" data-astra-universe="baseline" data-astra-source="outputs/metrics.json" data-astra-detail="Replace this template-only value with a scientifically meaningful result resolved from a real project artifact.">128 records</span> and returns a primary estimate of <span class="astra-value" tabindex="0" role="button" contenteditable="false" data-template-example="astra-value" data-astra-label="Primary estimate" data-astra-path="outputs.primary_results.metrics.primary_estimate" data-astra-universe="baseline" data-astra-source="outputs/metrics.json" data-astra-detail="Replace this template-only value with a measured result and its uncertainty from the project output.">0.84 ± 0.03</span>.</p>
+          <figure class="research-figure" data-template-example="astra-figure">
+            <a href="./example-result.svg" target="_blank" rel="noopener" aria-label="Open the example result figure at full size">
+              <img src="./example-result.svg" alt="Neutral example result figure to replace with a project artifact.">
+            </a>
+            <figcaption><span class="astra-value" tabindex="0" role="button" contenteditable="false" data-astra-label="Figure 1 · primary result" data-astra-path="outputs.primary_results.figures.primary_result" data-astra-universe="baseline" data-astra-source="example-result.svg" data-astra-detail="Replace this template-only figure with a relevant project output and concise interpretation.">Figure 1</span> Example primary result; replace this image and caption with a real project artifact.</figcaption>
+          </figure>
+          <p data-template-example="work-note" style="margin:0; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Checked the main result against the available reference evidence and recorded the remaining discrepancies that require follow-up.</p>
         </section>
       </sc-if>
 
@@ -142,31 +181,32 @@
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">The scattered-light background is spatially smooth on the scale of a 15 × 15 px cutout, so a single low-order surface per cutout is sufficient.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The selected inputs are representative of the population addressed by the research question.</div>
             </div>
           </li>
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">SPOC two-minute periods are treated as ground truth for the cross-check.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The primary metric captures the outcome the researcher intends to measure.</div>
             </div>
           </li>
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A3</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">Blending from neighbours brighter than T = 16 is negligible after difference imaging.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The baseline configuration is an appropriate reference for interpreting the result.</div>
             </div>
           </li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A4</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The generated artifacts faithfully record the completed analysis.</div></div></li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A5</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The remaining missing evidence does not overturn the current conclusion.</div></div></li>
         </ol>
       </sc-if>
 
       <sc-if value="{{ isNext }}">
         <section class="entry-panel" data-panel="next">
           <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Finish the recovery loop in <span style="font-family:'IBM Plex Mono',monospace; font-size:13px">inject_recover.py</span>; 10 000 injections across the T–P grid.</span></li>
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Add a 2P/½P check to the BLS post-processing and re-fold the 3 discrepant targets.</span></li>
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Pull Gaia DR3 neighbour counts within 21″ to bound the blending in A3.</span></li>
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span>Ask about dropping Sector 30 vs. keeping the flagged 9 targets.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span data-template-example="next-step">Validate the primary result against an independent or held-out check.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span data-template-example="next-step">Run at least one defensible alternative configuration.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span data-template-example="next-step">Resolve the missing evidence that most limits the conclusion.</span></li>
           </ul>
         </section>
       </sc-if>
@@ -182,8 +222,8 @@
 
       <sc-if value="{{ isWork }}">
         <section class="entry-panel" data-panel="work">
-          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">First full BLS run over the whole 412-target sample. Period grid 0.1–27 d, uniform in log period, 1 400 phase bins. Total 52 min on 40 cores. Wrote the peak-extraction step (top five peaks per target with their SDE) and a first-pass automated cut at SDE &gt; 8, which keeps 289 targets.</p>
-          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Phase-folded 40 of them by hand to see what the cut is actually letting through. Most look like genuine eclipses; roughly a fifth are clearly folded at twice the true period, and a handful are pulsators that BLS is happy to call a box.</p>
+          <p data-template-example="work-note" style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Ran the first complete analysis over the prepared inputs and inspected the resulting summaries for obvious failures.</p>
+          <p data-template-example="work-note" style="margin:0; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Compared a focused subset against the available reference evidence and recorded the discrepancies to investigate next.</p>
         </section>
       </sc-if>
 
@@ -192,24 +232,26 @@
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">SDE &gt; 8 is an acceptable detection threshold.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The initial quality threshold separates usable results from failures.</div>
             </div>
           </li>
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">A 27 d upper period limit is fine because a single sector cannot constrain anything longer.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The chosen analysis range covers the scientifically relevant regime.</div>
             </div>
           </li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A3</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The reference evidence is accurate enough for the comparison.</div></div></li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A4</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The inspected subset reveals the main failure modes.</div></div></li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A5</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">Uninspected outputs behave like the reviewed examples.</div></div></li>
         </ol>
       </sc-if>
 
       <sc-if value="{{ isNext }}">
         <section class="entry-panel" data-panel="next">
           <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Fix the Sector 30 background before trusting any of these detections.</span></li>
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Cross-check against SPOC two-minute targets.</span></li>
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span style="color:#1C1A17">Build the injection-recovery harness — carried to Day 13.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span data-template-example="next-step" style="textDecoration:line-through">Review the main generated outputs.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span data-template-example="next-step" style="color:#1C1A17">Investigate the highest-impact discrepancy.</span></li>
           </ul>
         </section>
       </sc-if>
@@ -225,8 +267,8 @@
 
       <sc-if value="{{ isWork }}">
         <section class="entry-panel" data-panel="work">
-          <p style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Finished the aperture-selection study. For each target I extracted light curves through nine circular apertures (r = 1.0–3.0 px in 0.25 px steps) and picked the one minimising the point-to-point scatter of the out-of-eclipse flux. Optimum sits at r ≈ 1.75 px for T = 13–14 and r ≈ 1.25 px for T = 14–15, as expected from the sky-noise argument.</p>
-          <p style="margin:0; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Also wrote the quality-flag mask (spacecraft momentum dumps, Earth/Moon crossings) and confirmed against the sector data-release notes that I am removing the right cadences and not more.</p>
+          <p data-template-example="work-note" style="margin:0 0 14px; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Prepared the input evidence, implemented the first analysis pass, and recorded the choices that could affect the result.</p>
+          <p data-template-example="work-note" style="margin:0; font-size:16px; line-height:1.65; maxWidth:64ch; textWrap:pretty">Confirmed that the pipeline produces the expected artifact types before running the full analysis.</p>
         </section>
       </sc-if>
 
@@ -235,23 +277,26 @@
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">Minimising point-to-point scatter is a fair proxy for maximising eclipse S/N.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The available evidence is sufficient to begin the analysis.</div>
             </div>
           </li>
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
             <div>
-              <div style="font-size:15px; line-height:1.6; maxWidth:60ch">The TESS PSF is constant across a single 15 × 15 px cutout.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The preprocessing choices preserve the signal of interest.</div>
             </div>
           </li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A3</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The selected implementation matches the intended method.</div></div></li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A4</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The initial checks are sensitive to consequential failures.</div></div></li>
+          <li style="display:flex; gap:14px; align-items:flex-start"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A5</span><div><div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The generated files retain enough information for later review.</div></div></li>
         </ol>
       </sc-if>
 
       <sc-if value="{{ isNext }}">
         <section class="entry-panel" data-panel="next">
           <ul style="display:flex; flex-direction:column; gap:10px; margin-bottom:20px">
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Freeze photometry v3 and run the first full BLS search.</span></li>
-            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span style="textDecoration:line-through">Decide a provisional detection threshold.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6; color:#8B8478"><span style="font-family:'IBM Plex Mono',monospace; color:#3F6B4A; flex:none">✓</span><span data-template-example="next-step" style="textDecoration:line-through">Run the first complete analysis.</span></li>
+            <li style="display:flex; gap:12px; font-size:15px; line-height:1.6"><span style="font-family:'IBM Plex Mono',monospace; color:#C4BCAB; flex:none">□</span><span data-template-example="next-step">Inspect the primary outputs and record discrepancies.</span></li>
           </ul>
         </section>
       </sc-if>
@@ -275,6 +320,7 @@
   </main>
 </div>
 </x-dc>
+<div class="astra-popover" data-astra-popover hidden role="dialog" aria-label="ASTRA value details"></div>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { day: 13, section: 'work' };
@@ -304,6 +350,88 @@ class Component extends DCLogic {
     };
   }
 }
+</script>
+<script>
+(function () {
+  "use strict";
+  const popover = document.querySelector("[data-astra-popover]");
+  let active = null;
+  let pinned = false;
+
+  function escapeHtml(value) {
+    const node = document.createElement("div");
+    node.textContent = value || "";
+    return node.innerHTML;
+  }
+
+  function show(target, shouldPin) {
+    active = target;
+    pinned = Boolean(shouldPin);
+    document.querySelectorAll(".astra-value[aria-expanded='true']").forEach((node) => node.setAttribute("aria-expanded", "false"));
+    target.setAttribute("aria-expanded", "true");
+    const source = target.dataset.astraSource;
+    popover.innerHTML = `
+      <div class="astra-popover-label">${escapeHtml(target.dataset.astraLabel)}</div>
+      <div class="astra-popover-value">${escapeHtml(target.textContent)}</div>
+      <div class="astra-popover-row"><span class="astra-popover-key">ASTRA</span><span>${escapeHtml(target.dataset.astraPath)}</span></div>
+      <div class="astra-popover-row"><span class="astra-popover-key">Universe</span><span>${escapeHtml(target.dataset.astraUniverse)}</span></div>
+      <div class="astra-popover-row"><span class="astra-popover-key">Source</span><span><a href="${encodeURI(source)}" target="_blank" rel="noopener">${escapeHtml(source)}</a></span></div>
+      <div class="astra-popover-note">${escapeHtml(target.dataset.astraDetail)}</div>
+      <div class="astra-popover-hint">${pinned ? "Pinned · click the value again to close" : "Click to pin this card"}</div>
+    `;
+    popover.hidden = false;
+    const rect = target.getBoundingClientRect();
+    const width = Math.min(340, window.innerWidth - 24);
+    const left = Math.max(12, Math.min(rect.left, window.innerWidth - width - 12));
+    const topBelow = rect.bottom + 10;
+    const estimatedHeight = 230;
+    const top = topBelow + estimatedHeight < window.innerHeight ? topBelow : Math.max(12, rect.top - estimatedHeight - 10);
+    popover.style.left = left + "px";
+    popover.style.top = top + "px";
+  }
+
+  function hide() {
+    if (active) active.setAttribute("aria-expanded", "false");
+    active = null;
+    pinned = false;
+    popover.hidden = true;
+  }
+
+  document.addEventListener("pointerover", (event) => {
+    const target = event.target.closest && event.target.closest(".astra-value");
+    if (target && !pinned) show(target, false);
+  });
+  document.addEventListener("pointerout", (event) => {
+    const target = event.target.closest && event.target.closest(".astra-value");
+    if (!target || pinned) return;
+    if (popover.contains(event.relatedTarget)) return;
+    hide();
+  });
+  document.addEventListener("focusin", (event) => {
+    const target = event.target.closest && event.target.closest(".astra-value");
+    if (target && !pinned) show(target, false);
+  });
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest && event.target.closest(".astra-value");
+    if (target) {
+      event.preventDefault();
+      if (active === target && pinned) hide();
+      else show(target, true);
+      return;
+    }
+    if (pinned && !popover.contains(event.target)) hide();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") hide();
+    if ((event.key === "Enter" || event.key === " ") && event.target.classList && event.target.classList.contains("astra-value")) {
+      event.preventDefault();
+      if (active === event.target && pinned) hide();
+      else show(event.target, true);
+    }
+  });
+  window.addEventListener("resize", hide);
+  window.addEventListener("scroll", () => { if (!pinned) hide(); }, true);
+})();
 </script>
 </body>
 </html>

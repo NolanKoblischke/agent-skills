@@ -1,6 +1,6 @@
 {
   "name": "nolan-koblischke",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Audience-aware assumption auditing and evidence-based research notebooks for agent projects.",
   "repository": "https://github.com/NolanKoblischke/agent-skills",
   "generated": "Run `npm run build` to regenerate. Do not edit by hand.",
@@ -17,7 +17,7 @@
     {
       "name": "research-log",
       "path": "skills/research-log",
-      "description": "Create or update a polished HTML research notebook from dated project evidence, using the bundled notebook template and the reveal-assumptions skill for ranked assumptions. Use when the user asks for a research log, research notebook, lab notebook, daily project journal, ongoing HTML progress record, or a concise record of completed work, assumptions, and next steps.",
+      "description": "Create or update a polished HTML research notebook from dated project evidence, using the bundled notebook template, reveal-assumptions for ranked assumptions, and ASTRA-linked results when astra.yaml is present. Use when the user asks for a research log, research notebook, lab notebook, daily project journal, ongoing HTML progress record, or a concise record of completed work, assumptions, and next steps.",
       "plugins": [
         "research-log"
       ]
@@ -57,7 +57,7 @@
     },
     {
       "name": "research-log",
-      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
+      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, next steps, and ASTRA-linked results when available.",
       "skills": [
         "know-your-audience",
         "research-log",

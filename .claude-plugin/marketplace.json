@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Audience-aware assumption auditing and evidence-based research notebooks for agent projects.",
-    "version": "0.3.0"
+    "version": "0.4.0"
   },
   "plugins": [
     {
@@ -20,7 +20,7 @@
     },
     {
       "name": "research-log",
-      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, and next steps.",
+      "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, next steps, and ASTRA-linked results when available.",
       "source": "./plugins/research-log"
     }
   ]

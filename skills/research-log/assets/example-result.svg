@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Example analysis result</title>
+  <desc id="desc">A neutral line chart placeholder to replace with a project figure.</desc>
+  <rect width="900" height="520" fill="#fffdf8"/>
+  <g stroke="#dcd5c7" stroke-width="1">
+    <path d="M110 80V430H820"/>
+    <path d="M110 150H820M110 220H820M110 290H820M110 360H820"/>
+  </g>
+  <g fill="#8b8478" font-family="IBM Plex Mono, monospace" font-size="16">
+    <text x="74" y="435">0</text>
+    <text x="210" y="465">1</text>
+    <text x="370" y="465">2</text>
+    <text x="530" y="465">3</text>
+    <text x="690" y="465">4</text>
+    <text x="445" y="500">Input</text>
+    <text transform="translate(28 300) rotate(-90)">Measured value</text>
+  </g>
+  <path d="M130 378C220 355 270 330 335 295S455 250 520 215 650 150 790 108"
+        fill="none" stroke="#8c2f1f" stroke-width="5"/>
+  <g fill="#8c2f1f" stroke="#fffdf8" stroke-width="4">
+    <circle cx="150" cy="371" r="9"/>
+    <circle cx="250" cy="337" r="9"/>
+    <circle cx="350" cy="286" r="9"/>
+    <circle cx="450" cy="252" r="9"/>
+    <circle cx="550" cy="198" r="9"/>
+    <circle cx="650" cy="157" r="9"/>
+    <circle cx="770" cy="116" r="9"/>
+  </g>
+  <text x="110" y="48" fill="#1c1a17" font-family="Spectral, Georgia, serif" font-size="26">
+    Replace with a project figure
+  </text>
+</svg>

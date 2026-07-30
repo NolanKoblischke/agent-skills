@@ -12,29 +12,32 @@ class ResearchLogTemplateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.html = TEMPLATE.read_text(encoding="utf-8")
+        cls.editor_js = (ASSETS / "research-log-editor.js").read_text(encoding="utf-8")
 
-    def test_required_assets_exist(self):
-        self.assertTrue(TEMPLATE.is_file())
-        self.assertTrue((ASSETS / "support.js").is_file())
-        editor = ASSETS / "research-log-editor.js"
-        self.assertTrue(editor.is_file())
+    def test_required_assets_and_editing_contract(self):
+        for name in (
+            "Research Notebook.dc.html",
+            "support.js",
+            "research-log-editor.js",
+            "example-result.svg",
+        ):
+            self.assertTrue((ASSETS / name).is_file(), name)
+
         self.assertIn('<script src="./support.js"></script>', self.html)
         self.assertIn('<script src="./research-log-editor.js" defer></script>', self.html)
-        editor_js = editor.read_text(encoding="utf-8")
         for contract in (
             'contenteditable", "true"',
             'data-editor-action="add"',
-            'data-editor-action="download"',
             'data-editor-action="reset"',
             "localStorage.setItem",
             "state.items[key].deleted = true",
-            'type="application/json"',
-            'fetch(new URL("support.js", baseUrl)',
-            'fetch(new URL("research-log-editor.js", baseUrl)',
         ):
-            self.assertIn(contract, editor_js)
+            self.assertIn(contract, self.editor_js)
 
-    def test_each_day_has_only_core_panels(self):
+        self.assertNotIn("Download edited HTML", self.editor_js)
+        self.assertNotIn('data-editor-action="download"', self.editor_js)
+
+    def test_each_day_has_only_core_panels_and_five_assumptions(self):
         for day in (11, 12, 13):
             match = re.search(
                 rf'<article id="day-{day}".*?</article>',
@@ -45,6 +48,7 @@ class ResearchLogTemplateTests(unittest.TestCase):
             entry = match.group(0)
             for panel in ("work", "assumptions", "next"):
                 self.assertEqual(entry.count(f'data-panel="{panel}"'), 1)
+            self.assertEqual(len(re.findall(r">A[1-5]</span>", entry)), 5)
             for removed in (
                 "Worked / didn't",
                 "Provenance",
@@ -64,16 +68,40 @@ class ResearchLogTemplateTests(unittest.TestCase):
         self.assertIn("goAssumptions: () => this.show('assumptions')", self.html)
         self.assertIn("goNextSection: () => this.show('next')", self.html)
 
-    def test_removed_global_example_sections_stay_removed(self):
-        for removed in (
-            "Flagged for Prof.",
-            "Raw data and pipeline commits",
-            "Period recovery for faint eclipsing binaries",
-            "TESS-EB-01",
-            "Kept by",
-            "est. 4 more days",
+    def test_astra_value_and_figure_contract(self):
+        self.assertIn('class="astra-value"', self.html)
+        self.assertIn('class="research-figure"', self.html)
+        self.assertIn('data-astra-path="outputs.primary_results.metrics.sample_count"', self.html)
+        self.assertIn('data-astra-universe="baseline"', self.html)
+        self.assertIn('data-astra-source="outputs/metrics.json"', self.html)
+        self.assertIn('data-astra-detail=', self.html)
+        self.assertIn('data-astra-popover', self.html)
+        self.assertIn('contenteditable="false"', self.html)
+        self.assertIn('!span.classList.contains("astra-value")', self.editor_js)
+
+    def test_template_is_domain_neutral(self):
+        for domain_specific in (
+            "TESS",
+            "TRGB",
+            "SMC",
+            "LMC",
+            "OGLE",
+            "Gaia",
+            "eclipsing",
+            "Sector 30",
+            "J. Okonkwo",
         ):
-            self.assertNotIn(removed, self.html)
+            self.assertNotIn(domain_specific, self.html)
+
+        for placeholder in (
+            'data-template-example="project-title"',
+            'data-template-example="work-note"',
+            'data-template-example="assumption"',
+            'data-template-example="next-step"',
+            'data-template-example="astra-value"',
+            'data-template-example="astra-figure"',
+        ):
+            self.assertIn(placeholder, self.html)
 
 
 if __name__ == "__main__":

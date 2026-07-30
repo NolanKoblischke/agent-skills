@@ -42,6 +42,11 @@ class SkillIntegrationTests(unittest.TestCase):
         self.assertIn("Delegate the assumptions audit to one subagent", text)
         self.assertIn("audience-profile", text)
         self.assertIn("using only each assumption statement", text)
+        self.assertIn("If the project has `astra.yaml`", text)
+        self.assertIn("ASTRA-linked results", text)
+        self.assertIn("MyST is not required", text)
+        self.assertIn("example-result.svg", text)
+        self.assertNotIn("download an HTML copy", text)
 
     def test_reveal_assumptions_has_no_stop_hook_contract(self):
         text = (ROOT / "skills" / "reveal-assumptions" / "SKILL.md").read_text()

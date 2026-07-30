@@ -2,7 +2,6 @@
   "use strict";
 
   const STORAGE_PREFIX = "research-log-edits-v1:";
-  const SEED_ID = "research-log-edits";
   const stateKey = STORAGE_PREFIX + location.pathname;
   let state = loadState();
   let hydrating = false;
@@ -17,12 +16,6 @@
       if (stored) return normalizeState(JSON.parse(stored));
     } catch (_) {}
 
-    const seed = document.getElementById(SEED_ID);
-    if (seed) {
-      try {
-        return normalizeState(JSON.parse(seed.textContent || "{}"));
-      } catch (_) {}
-    }
     return emptyState();
   }
 
@@ -120,7 +113,6 @@
     toolbar.innerHTML = `
       <span class="research-editor-status" data-editor-status>Click text to edit · saves in this browser</span>
       <button type="button" class="research-editor-button" data-editor-action="add">+ Add item</button>
-      <button type="button" class="research-editor-button" data-editor-action="download">Download edited HTML</button>
       <button type="button" class="research-editor-button" data-editor-action="reset">Reset edits</button>
     `;
     tabs.insertAdjacentElement("afterend", toolbar);
@@ -143,7 +135,9 @@
     if (type === "assumptions") {
       return item.querySelector("div > div") || item.querySelector("span:last-of-type");
     }
-    const spans = item.querySelectorAll(":scope > span");
+    const spans = Array.from(item.querySelectorAll(":scope > span")).filter(
+      (span) => !span.classList.contains("astra-value"),
+    );
     if (spans.length > 1) return spans[spans.length - 1];
     if (spans.length === 1 && item.childNodes.length > 1) return spans[0];
     return null;
@@ -307,50 +301,6 @@
     location.reload();
   }
 
-  async function downloadEditedHtml() {
-    try {
-      const baseUrl = new URL(".", location.href);
-      const [pageResponse, supportResponse, editorResponse] = await Promise.all([
-        fetch(location.href, { cache: "no-store" }),
-        fetch(new URL("support.js", baseUrl), { cache: "no-store" }),
-        fetch(new URL("research-log-editor.js", baseUrl), { cache: "no-store" }),
-      ]);
-      let source = await pageResponse.text();
-      const supportSource = (await supportResponse.text()).replace(/<\/script/gi, "<\\/script");
-      const editorSource = (await editorResponse.text()).replace(/<\/script/gi, "<\\/script");
-      source = source.replace(
-        new RegExp(`<script[^>]+id=["']${SEED_ID}["'][\\s\\S]*?<\\/script>`, "i"),
-        "",
-      );
-      const json = JSON.stringify(state)
-        .replace(/</g, "\\u003c")
-        .replace(/>/g, "\\u003e")
-        .replace(/&/g, "\\u0026");
-      source = source
-        .replace(
-          /<script\s+src=["']\.\/support\.js["']\s*><\/script>/i,
-          `<script>\n${supportSource}\n</script>`,
-        )
-        .replace(
-          /<script\s+src=["']\.\/research-log-editor\.js["'](?:\s+defer)?\s*><\/script>/i,
-          `<script id="${SEED_ID}" type="application/json">${json}</script>\n<script>\n${editorSource}\n</script>`,
-        );
-      const blob = new Blob([source], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      const baseName = decodeURIComponent(location.pathname.split("/").pop() || "research-notebook.dc.html");
-      link.href = url;
-      link.download = baseName.replace(/\.html$/i, "-edited.html");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-      setStatus("Edited HTML downloaded");
-    } catch (_) {
-      setStatus("Could not download this page");
-    }
-  }
-
   document.addEventListener("input", (event) => {
     const target = event.target.closest && event.target.closest(".research-editable");
     if (!target) return;
@@ -373,7 +323,6 @@
     const action = button.dataset.editorAction;
     if (action === "add") addItem();
     if (action === "delete") deleteItem(button.dataset.itemKey);
-    if (action === "download") downloadEditedHtml();
     if (action === "reset") resetEdits();
   });
 
