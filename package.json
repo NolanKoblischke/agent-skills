@@ -1,23 +1,19 @@
 {
-  "name": "@lightcone/agent-skills",
-  "version": "0.0.2",
+  "name": "@nolankoblischke/agent-skills",
+  "version": "0.1.0",
   "private": true,
-  "description": "Agent skills for Lightcone Research — ASTRA specs and paper reproduction.",
+  "description": "A live assumption dashboard skill and Stop hook for Claude Code and Codex.",
   "type": "module",
   "license": "BSD-3-Clause",
-  "author": "Lightcone Research",
+  "author": "Nolan Koblischke",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LightconeResearch/agent-skills.git"
+    "url": "git+https://github.com/NolanKoblischke/agent-skills.git"
   },
   "scripts": {
     "build": "node scripts/build.mjs",
-    "docs:build": "uvx --from zensical zensical build",
-    "docs:serve": "uvx --from zensical zensical serve",
     "validate": "node scripts/validate.mjs",
-    "fetch-getting-started": "node scripts/fetch-getting-started.mjs",
-    "test": "node scripts/validate.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "test": "node scripts/validate.mjs && python3 tests/test_update_dashboard.py"
   },
   "engines": {
     "node": ">=18"

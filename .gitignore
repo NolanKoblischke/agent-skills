@@ -7,5 +7,5 @@ __pycache__/
 *.pyc
 .venv/
 
-# Zensical documentation build
-site/
+# Local test output
+.assumptions.html

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reveal Assumptions"
+  short_description: "Maintain a live top-five assumptions dashboard"
+  default_prompt: "Use $reveal-assumptions to update the live assumptions dashboard for this project."
