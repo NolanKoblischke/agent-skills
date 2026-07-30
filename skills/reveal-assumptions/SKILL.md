@@ -22,17 +22,20 @@ Create a complete, self-contained HTML document that:
 - contains exactly five `<article data-assumption="N">` elements numbered
   `1` through `5`;
 - ranks the assumptions from highest to lowest expected impact;
-- explains each assumption, why it was made, current evidence, reasonable
-  alternatives, the risk if wrong, and its status;
+- explains only each assumption, why it was made, and the current evidence;
 - distinguishes observed evidence from inference;
 - states when the dashboard was last updated;
-- uses embedded CSS and no external assets or scripts;
+- uses embedded CSS with `color-scheme: light`, a white or near-white
+  background, dark text, and no dark-mode overrides;
+- uses no external assets or scripts;
 - remains readable on desktop and mobile.
 
 Replace stale entries rather than appending indefinitely. Preserve still-relevant
 assumptions when new evidence has not displaced them. If fewer than five genuine
 assumptions exist, use lower-risk assumptions from the work instead of inventing
 facts.
+
+Do not include sections or labels for alternatives, risk if wrong, or status.
 
 Do not repeat or revise the substantive answer that was already prepared. Only
 update the dashboard, verify the required meta tag and five numbered articles,
