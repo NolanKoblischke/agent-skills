@@ -11,6 +11,11 @@ Actively identify choices made without direct evidence that they preserve the us
 
 Write each top-five title as an actionable issue title that names the affected component or calculation, states the concrete failure, and indicates the required correction; the title must be understandable without reading any supporting explanation.
 
+Use candid first-person wording that plainly states what you did and what might be wrong. For example:
+
+- "I hardcoded the crop coordinate and it might be internally inconsistent."
+- "I didn't verify if the bands were 'g,r,i,z' or 'g,r,z,y', it might be wrong!"
+
 Audit the work completed in the current turn and the project's current state.
 Update `.assumptions.html` at the project root before finishing.
 
