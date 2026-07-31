@@ -1,6 +1,6 @@
 {
   "name": "research-log",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Create and maintain an audience-aware HTML research notebook with daily work, ranked assumptions, next steps, and ASTRA-linked results when available.",
   "author": {
     "name": "Nolan Koblischke"

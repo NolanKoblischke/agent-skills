@@ -1,6 +1,6 @@
 {
   "name": "audience-aware-skills",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Interview a scientist about a reader and create a durable communication profile for that audience.",
   "author": {
     "name": "Nolan Koblischke"

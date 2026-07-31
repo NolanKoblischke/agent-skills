@@ -1,6 +1,6 @@
 {
   "name": "reveal-assumptions",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Audit completed work and maintain a project-local HTML dashboard of the five assumptions most likely to affect correctness or require user review.",
   "author": {
     "name": "Nolan Koblischke"

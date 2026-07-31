@@ -82,7 +82,8 @@ explicitly asks for them.
 - Keep the notebook, `support.js`, and `research-log-editor.js` adjacent in the
   output directory.
 - Preserve the browser editing layer: users must be able to edit text, delete
-  or add items, autosave changes locally, and reset edits.
+  or add items, autosave changes locally, save a complete HTML file with those
+  changes baked in, and reset edits.
 - Preserve the assumption source-link layer: clicking a `.code-ref` link must
   open an in-page preview with the cited lines highlighted and a raw-file link.
 - Replace example names, dates, paths, project details, and scientific claims.
@@ -143,7 +144,7 @@ solely for decoration.
 
 - `assets/Research Notebook.dc.html`: approved visual and structural template.
 - `assets/support.js`: required local runtime for the `.dc.html` template.
-- `assets/research-log-editor.js`: browser editing, local autosave, and
-  reset support.
+- `assets/research-log-editor.js`: browser editing, local autosave, durable HTML
+  export, and reset support.
 - `assets/example-result.svg`: neutral figure placeholder used only by the
   template; replace it with a real artifact or remove it.
