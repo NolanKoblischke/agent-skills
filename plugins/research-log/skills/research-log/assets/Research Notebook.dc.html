@@ -13,50 +13,130 @@
 <meta name="omelette-owns-print" content="true">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
 <style>
-  html, body { margin: 0; padding: 0; background: #F4F1EA; }
-  body { font-family: "Spectral", Georgia, serif; color: #1C1A17; -webkit-font-smoothing: antialiased; }
+  :root {
+    --navy: #123B60;
+    --navy-soft: #24577E;
+    --blue: #2D9DD5;
+    --blue-light: #DDF2FC;
+    --blue-pale: #EEF8FD;
+    --yellow: #FFD52E;
+    --ink: #18344D;
+    --muted: #688198;
+    --line: #A9CFE4;
+    --white: #FFFFFF;
+  }
+  html, body { margin: 0; padding: 0; background: var(--blue-light); }
+  body { font-family: "Nunito Sans", Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
   * { box-sizing: border-box; }
-  a { color: #8C2F1F; text-decoration: none; }
-  a:hover { color: #1C1A17; text-decoration: underline; }
+  a { color: #167BB1; text-decoration: none; }
+  a:hover { color: var(--navy); text-decoration: underline; }
   ol, ul { margin: 0; padding: 0; list-style: none; }
-  .entry-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-bottom: 1px solid #8B8478; margin: 0 0 34px; }
-  .entry-tab { appearance: none; border: 0; background: transparent; color: #A39B8C; cursor: pointer; font: inherit; font-size: 18px; padding: 0 8px 12px; text-align: left; }
-  .entry-tab:hover { color: #4A443B; }
-  .entry-tab.active { border-bottom: 3px solid #8C2F1F; color: #1C1A17; font-weight: 500; margin-bottom: -2px; }
+  .notebook-shell {
+    background: var(--white) !important;
+    border-top: 8px solid var(--blue);
+    box-shadow: inset 0 3px 0 var(--navy);
+  }
+  .notebook-shell aside {
+    background: var(--blue-pale) !important;
+    border-right: 4px solid var(--navy) !important;
+    color: var(--ink);
+  }
+  .notebook-shell main { background: var(--white); }
+  .notebook-shell main > header {
+    border-bottom: 4px solid var(--navy) !important;
+    padding-bottom: 26px !important;
+  }
+  .notebook-shell main h1 {
+    color: var(--navy); font-size: 42px !important; font-weight: 800 !important;
+    letter-spacing: -.035em !important;
+  }
+  .notebook-shell main h2 { color: var(--navy); font-weight: 800 !important; }
+  .notebook-shell article > div:first-child { border-bottom: 2px solid var(--navy) !important; }
+  .notebook-shell [style*="color:#8C2F1F"] { color: #167BB1 !important; }
+  .notebook-shell [style*="color:#1C1A17"] { color: var(--ink) !important; }
+  .notebook-shell [style*="color:#4A443B"] { color: #46647B !important; }
+  .notebook-shell [style*="color:#6E675C"] { color: var(--muted) !important; }
+  .notebook-shell [style*="color:#8B8478"],
+  .notebook-shell [style*="color:#A39B8C"] { color: #7890A4 !important; }
+  .notebook-shell [style*="color:#C4BCAB"] { color: #A9C1D1 !important; }
+  .notebook-shell [style*="background:#E4DED1"] {
+    background: var(--blue-light) !important; border-radius: 10px !important;
+  }
+  .entry-calendar { margin: 0 -4px 26px; }
+  .calendar-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 0 4px 12px; }
+  .calendar-month { font: 800 17px/1.2 "Nunito Sans", Arial, sans-serif; color: var(--navy); }
+  .calendar-year { font: 500 10px/1.2 "IBM Plex Mono", monospace; color: var(--muted); }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; }
+  .calendar-weekday { padding: 0 0 5px; text-align: center; font: 600 9px/1 "IBM Plex Mono", monospace; color: #7793A7; text-transform: uppercase; }
+  .calendar-blank { aspect-ratio: 1; }
+  .calendar-day {
+    appearance: none; aspect-ratio: 1; min-width: 0; padding: 0; border: 1px solid transparent;
+    border-radius: 8px; background: transparent; color: #A8C1D0; cursor: default;
+    font: 600 11px/1 "IBM Plex Mono", monospace; text-align: center;
+  }
+  .calendar-day.has-note { background: var(--navy); border-color: var(--navy); color: var(--white); cursor: pointer; font-weight: 700; }
+  .calendar-day.has-note:hover { background: var(--blue); border-color: var(--navy); color: var(--white); }
+  .calendar-day.has-note:focus-visible { outline: 3px solid var(--yellow); outline-offset: 2px; }
+  .calendar-day.selected { background: var(--yellow); border: 2px solid var(--navy); color: var(--navy); box-shadow: 2px 2px 0 var(--navy); }
+  .calendar-day.selected:hover { background: var(--yellow); border-color: var(--navy); color: var(--navy); }
+  .calendar-legend { display: flex; align-items: center; gap: 14px; margin: 10px 4px 0; font: 500 9px/1.3 "IBM Plex Mono", monospace; color: var(--muted); }
+  .calendar-key { display: inline-flex; align-items: center; gap: 5px; }
+  .calendar-swatch { width: 8px; height: 8px; border-radius: 2px; background: var(--navy); border: 1px solid var(--navy); }
+  .calendar-swatch.empty { background: transparent; border-color: var(--line); }
+  .entry-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-bottom: 2px solid var(--line); margin: 0 0 34px; }
+  .entry-tab {
+    appearance: none; border: 0; border-bottom: 4px solid transparent; border-radius: 0; background: transparent;
+    color: #8AA0B1; cursor: pointer; font: 700 17px/1.2 "Nunito Sans", Arial, sans-serif;
+    padding: 0 10px 15px; text-align: left; margin-bottom: -2px;
+  }
+  .entry-tab:hover { color: var(--navy); border-bottom-color: #8BC8E7; }
+  .entry-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+  .entry-tab.active { border-bottom-color: var(--blue); background: transparent; color: var(--navy); font-weight: 800; box-shadow: none; }
   .entry-panel { max-width: 70ch; }
   .research-figure { margin: 28px 0 30px; }
   .research-figure a { display: block; }
   .research-figure img {
-    display: block; width: 100%; height: auto; border: 1px solid #DCD5C7;
-    background: #FFFDF8;
+    display: block; width: 100%; height: auto; border: 2px solid var(--navy);
+    border-radius: 16px; background: var(--white);
   }
   .research-figure figcaption {
-    margin-top: 9px; color: #6E675C; font-size: 13px; line-height: 1.55;
+    margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.55;
   }
   .astra-value {
-    display: inline-flex; align-items: baseline; gap: .28em; color: #8C2F1F;
-    border-bottom: 1px dotted #8C2F1F; cursor: pointer; font-weight: 500;
+    display: inline-flex; align-items: baseline; gap: .28em; color: #167BB1;
+    border-bottom: 1px dotted #167BB1; cursor: pointer; font-weight: 700;
     white-space: nowrap; outline: none;
   }
   .astra-value::after { content: "↗"; font: 500 9px/1 "IBM Plex Mono", monospace; opacity: .65; }
   .astra-value:hover, .astra-value:focus-visible, .astra-value[aria-expanded="true"] {
-    color: #1C1A17; border-bottom-style: solid;
+    color: var(--navy); border-bottom-style: solid;
   }
   .astra-popover {
     position: fixed; z-index: 1000; width: min(340px, calc(100vw - 24px)); padding: 15px 16px;
-    background: #FFFDF8; border: 1px solid #CFC5B4; border-top: 3px solid #8C2F1F;
-    box-shadow: 0 12px 32px rgba(28,26,23,.16); border-radius: 2px;
-    font-family: "IBM Plex Mono", monospace; color: #4A443B;
+    background: var(--white); border: 2px solid var(--navy); border-top: 7px solid var(--blue);
+    box-shadow: 5px 5px 0 rgba(18,59,96,.16); border-radius: 14px;
+    font-family: "IBM Plex Mono", monospace; color: #46647B;
   }
   .astra-popover[hidden] { display: none; }
-  .astra-popover-label { font: 500 10px/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: #8C2F1F; }
-  .astra-popover-value { margin: 5px 0 10px; font: 500 24px/1.15 "Spectral", Georgia, serif; color: #1C1A17; }
+  .astra-popover-label { font: 600 10px/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; color: #167BB1; }
+  .astra-popover-value { margin: 5px 0 10px; font: 800 24px/1.15 "Nunito Sans", Arial, sans-serif; color: var(--navy); }
   .astra-popover-row { display: grid; grid-template-columns: 64px 1fr; gap: 8px; margin-top: 6px; font-size: 10px; line-height: 1.5; overflow-wrap: anywhere; }
-  .astra-popover-key { color: #A39B8C; text-transform: uppercase; letter-spacing: .06em; }
-  .astra-popover-note { margin-top: 10px; padding-top: 9px; border-top: 1px solid #E4DED1; font: 12px/1.45 "Spectral", Georgia, serif; color: #4A443B; }
-  .astra-popover-hint { margin-top: 8px; color: #A39B8C; font-size: 9px; }
+  .astra-popover-key { color: #7890A4; text-transform: uppercase; letter-spacing: .06em; }
+  .astra-popover-note { margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--line); font: 12px/1.45 "Nunito Sans", Arial, sans-serif; color: #46647B; }
+  .astra-popover-hint { margin-top: 8px; color: #7890A4; font-size: 9px; }
+  .research-editor-status { color: var(--muted) !important; }
+  .research-editor-button {
+    border: 2px solid var(--navy) !important; border-radius: 999px !important;
+    background: var(--white) !important; color: var(--navy) !important; padding: 8px 13px !important;
+  }
+  .research-editor-button:hover, .research-editor-button:focus-visible {
+    background: var(--yellow) !important; border-color: var(--navy) !important; color: var(--navy) !important;
+  }
+  .research-editor-delete { color: var(--muted) !important; background: var(--blue-pale) !important; }
+  .research-editor-delete:hover, .research-editor-delete:focus-visible { background: var(--yellow) !important; color: var(--navy) !important; }
+  .research-editable:focus { background: #FFF9D9 !important; box-shadow: 0 0 0 4px #FFF9D9 !important; text-decoration-color: var(--blue) !important; }
   @media (max-width: 720px) {
     .entry-tab { font-size: 14px; padding-left: 3px; padding-right: 3px; }
     .notebook-shell { display: block !important; }
@@ -65,6 +145,7 @@
   }
   @media print {
     body { background: #fff; }
+    .notebook-shell { border: 0; box-shadow: none; }
     aside { display: none !important; }
     .astra-popover { display: none !important; }
     .astra-value { color: inherit; border: 0; }
@@ -92,8 +173,8 @@
         <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#3F6B4A; width:12px; flex:none; line-height:1.5">✓</span>
         <span data-template-example="phase" style="font-size:13px; color:#6E675C; line-height:1.5">Prepare the analysis inputs</span>
       </li>
-      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0; background:#E4DED1; margin:2px -10px; paddingLeft:10px; paddingRight:10px; borderRadius:2px">
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; width:12px; flex:none; line-height:1.5">▸</span>
+      <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0; background:#DDF2FC; margin:2px -10px; paddingLeft:10px; paddingRight:10px; borderRadius:10px">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#167BB1; width:12px; flex:none; line-height:1.5">▸</span>
         <span data-template-example="phase" style="font-size:13px; color:#1C1A17; line-height:1.5; font-weight:500">Review primary results</span>
       </li>
       <li style="display:flex; gap:11px; align-items:flex-start; padding:6px 0">
@@ -111,26 +192,53 @@
     </ol>
 
     <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#8B8478; margin-bottom:10px">Entries</div>
-    <div style="display:flex; flex-direction:column; gap:2px">
-      <sc-if value="{{ not11 }}">
-        <div onClick="{{ go11 }}" style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6E675C; padding:6px 10px; margin:0 -10px; cursor:pointer; borderRadius:2px" style-hover="background:#E4DED1; color:#8C2F1F"><span>Day 11</span><span style="color:#A39B8C">Fri 24 Jul</span></div>
-      </sc-if>
-      <sc-if value="{{ is11 }}">
-        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1C1A17; font-weight:600; padding:6px 10px; margin:0 -10px; background:#E4DED1; borderRadius:2px"><span>Day 11</span><span style="color:#8C2F1F">Fri 24 Jul</span></div>
-      </sc-if>
-      <sc-if value="{{ not12 }}">
-        <div onClick="{{ go12 }}" style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6E675C; padding:6px 10px; margin:0 -10px; cursor:pointer; borderRadius:2px" style-hover="background:#E4DED1; color:#8C2F1F"><span>Day 12</span><span style="color:#A39B8C">Mon 27 Jul</span></div>
-      </sc-if>
-      <sc-if value="{{ is12 }}">
-        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1C1A17; font-weight:600; padding:6px 10px; margin:0 -10px; background:#E4DED1; borderRadius:2px"><span>Day 12</span><span style="color:#8C2F1F">Mon 27 Jul</span></div>
-      </sc-if>
-      <sc-if value="{{ not13 }}">
-        <div onClick="{{ go13 }}" style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#6E675C; padding:6px 10px; margin:0 -10px; cursor:pointer; borderRadius:2px" style-hover="background:#E4DED1; color:#8C2F1F"><span>Day 13</span><span style="color:#A39B8C">Tue 28 Jul</span></div>
-      </sc-if>
-      <sc-if value="{{ is13 }}" hint-placeholder-val="{{ true }}">
-        <div style="display:flex; justify-content:space-between; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1C1A17; font-weight:600; padding:6px 10px; margin:0 -10px; background:#E4DED1; borderRadius:2px"><span>Day 13</span><span style="color:#8C2F1F">Tue 28 Jul</span></div>
-      </sc-if>
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#C4BCAB; padding:6px 0">Days 1–10 · archived</div>
+    <div class="entry-calendar" aria-label="July 2026 research entries">
+      <div class="calendar-heading">
+        <span class="calendar-month">July</span>
+        <span class="calendar-year">2026</span>
+      </div>
+      <div class="calendar-grid" role="grid" aria-label="July 2026">
+        <span class="calendar-weekday" aria-label="Sunday">S</span><span class="calendar-weekday" aria-label="Monday">M</span><span class="calendar-weekday" aria-label="Tuesday">T</span><span class="calendar-weekday" aria-label="Wednesday">W</span><span class="calendar-weekday" aria-label="Thursday">T</span><span class="calendar-weekday" aria-label="Friday">F</span><span class="calendar-weekday" aria-label="Saturday">S</span>
+        <span class="calendar-blank" aria-hidden="true"></span><span class="calendar-blank" aria-hidden="true"></span><span class="calendar-blank" aria-hidden="true"></span>
+        <button type="button" class="calendar-day" aria-label="July 1, no note" disabled>1</button>
+        <button type="button" class="calendar-day" aria-label="July 2, no note" disabled>2</button>
+        <button type="button" class="calendar-day" aria-label="July 3, no note" disabled>3</button>
+        <button type="button" class="calendar-day" aria-label="July 4, no note" disabled>4</button>
+        <button type="button" class="calendar-day" aria-label="July 5, no note" disabled>5</button>
+        <button type="button" class="calendar-day" aria-label="July 6, no note" disabled>6</button>
+        <button type="button" class="calendar-day" aria-label="July 7, no note" disabled>7</button>
+        <button type="button" class="calendar-day" aria-label="July 8, no note" disabled>8</button>
+        <button type="button" class="calendar-day" aria-label="July 9, no note" disabled>9</button>
+        <button type="button" class="calendar-day" aria-label="July 10, no note" disabled>10</button>
+        <button type="button" class="calendar-day" aria-label="July 11, no note" disabled>11</button>
+        <button type="button" class="calendar-day" aria-label="July 12, no note" disabled>12</button>
+        <button type="button" class="calendar-day" aria-label="July 13, no note" disabled>13</button>
+        <button type="button" class="calendar-day" aria-label="July 14, no note" disabled>14</button>
+        <button type="button" class="calendar-day" aria-label="July 15, no note" disabled>15</button>
+        <button type="button" class="calendar-day" aria-label="July 16, no note" disabled>16</button>
+        <button type="button" class="calendar-day" aria-label="July 17, no note" disabled>17</button>
+        <button type="button" class="calendar-day" aria-label="July 18, no note" disabled>18</button>
+        <button type="button" class="calendar-day" aria-label="July 19, no note" disabled>19</button>
+        <button type="button" class="calendar-day" aria-label="July 20, no note" disabled>20</button>
+        <button type="button" class="calendar-day" aria-label="July 21, no note" disabled>21</button>
+        <button type="button" class="calendar-day" aria-label="July 22, no note" disabled>22</button>
+        <button type="button" class="calendar-day" aria-label="July 23, no note" disabled>23</button>
+        <sc-if value="{{ not11 }}"><button type="button" class="calendar-day has-note" aria-label="July 24, Day 11 note" onClick="{{ go11 }}">24</button></sc-if>
+        <sc-if value="{{ is11 }}"><button type="button" class="calendar-day has-note selected" aria-label="July 24, Day 11 note, selected" aria-current="date">24</button></sc-if>
+        <button type="button" class="calendar-day" aria-label="July 25, no note" disabled>25</button>
+        <button type="button" class="calendar-day" aria-label="July 26, no note" disabled>26</button>
+        <sc-if value="{{ not12 }}"><button type="button" class="calendar-day has-note" aria-label="July 27, Day 12 note" onClick="{{ go12 }}">27</button></sc-if>
+        <sc-if value="{{ is12 }}"><button type="button" class="calendar-day has-note selected" aria-label="July 27, Day 12 note, selected" aria-current="date">27</button></sc-if>
+        <sc-if value="{{ not13 }}"><button type="button" class="calendar-day has-note" aria-label="July 28, Day 13 note" onClick="{{ go13 }}">28</button></sc-if>
+        <sc-if value="{{ is13 }}" hint-placeholder-val="{{ true }}"><button type="button" class="calendar-day has-note selected" aria-label="July 28, Day 13 note, selected" aria-current="date">28</button></sc-if>
+        <button type="button" class="calendar-day" aria-label="July 29, no note" disabled>29</button>
+        <button type="button" class="calendar-day" aria-label="July 30, no note" disabled>30</button>
+        <button type="button" class="calendar-day" aria-label="July 31, no note" disabled>31</button>
+      </div>
+      <div class="calendar-legend" aria-hidden="true">
+        <span class="calendar-key"><span class="calendar-swatch"></span>note</span>
+        <span class="calendar-key"><span class="calendar-swatch empty"></span>empty</span>
+      </div>
     </div>
 
   </aside>
