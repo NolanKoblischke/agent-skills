@@ -79,6 +79,29 @@ class ResearchLogTemplateTests(unittest.TestCase):
         self.assertIn('contenteditable="false"', self.html)
         self.assertIn('!span.classList.contains("astra-value")', self.editor_js)
 
+    def test_assumption_code_link_contract(self):
+        for contract in (
+            'class="code-ref"',
+            'data-code-path="src/analysis.py"',
+            'data-code-start="42"',
+            'data-code-end="47"',
+            'data-code-popover',
+            'document.querySelector("[data-code-popover]")',
+            'fetch(path)',
+            '.code-line.is-target',
+            'Open raw source ↗',
+        ):
+            self.assertIn(contract, self.html)
+
+        self.assertIn(
+            "I hardcoded the crop coordinate and it might be internally inconsistent.",
+            self.html,
+        )
+        self.assertIn(
+            "I didn't verify if the bands were 'g,r,i,z' or 'g,r,z,y', this might be wrong!",
+            self.html,
+        )
+
     def test_template_is_domain_neutral(self):
         for domain_specific in (
             "TESS",

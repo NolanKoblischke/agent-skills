@@ -46,6 +46,8 @@ class SkillIntegrationTests(unittest.TestCase):
         self.assertIn("ASTRA-linked results", text)
         self.assertIn("MyST is not required", text)
         self.assertIn("example-result.svg", text)
+        self.assertIn("Assumption source links", text)
+        self.assertIn("data-code-path", text)
         self.assertNotIn("download an HTML copy", text)
 
     def test_reveal_assumptions_has_no_stop_hook_contract(self):
@@ -59,6 +61,8 @@ class SkillIntegrationTests(unittest.TestCase):
             "the title must be understandable without reading any supporting explanation",
             text,
         )
+        self.assertIn('class="code-ref"', text)
+        self.assertIn("data-code-start", text)
 
 
 if __name__ == "__main__":

@@ -16,6 +16,23 @@ Use candid first-person wording that plainly states what you did and what might 
 - "I hardcoded the crop coordinate and it might be internally inconsistent."
 - "I didn't verify if the bands were 'g,r,i,z' or 'g,r,z,y', it might be wrong!"
 
+For each implementation assumption, locate the most important exact source line
+or narrow line range that shows the choice. When a reliable location exists,
+include one project-relative source link in its dashboard article immediately
+after the assumption statement:
+
+```html
+<a class="code-ref" href="./src/analysis.py#L42"
+   data-code-path="src/analysis.py" data-code-start="42" data-code-end="47">
+  src/analysis.py:42–47
+</a>
+```
+
+Keep the range focused on the implementation evidence, normally no more than
+20 lines. Verify that the displayed path and line numbers match the current
+file. Omit the link when the assumption is not about code or no exact location
+can be established; do not invent a citation.
+
 Audit the work completed in the current turn and the project's current state.
 Update `.assumptions.html` at the project root before finishing.
 
@@ -34,6 +51,8 @@ Create a complete, self-contained HTML document that:
   `1` through `5`;
 - ranks the assumptions from highest to lowest expected impact;
 - explains only each assumption, why it was made, and the current evidence;
+- preserves the optional `.code-ref` source-link markup above when exact code
+  evidence exists and styles it as a compact readable link;
 - distinguishes observed evidence from inference;
 - states when the dashboard was last updated;
 - uses embedded CSS with `color-scheme: light`, a white or near-white

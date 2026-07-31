@@ -26,8 +26,8 @@ terminal transcript or an exhaustive provenance dump.
    installed `reveal-assumptions` skill on the same user-identified evidence
    and update the project-root `.assumptions.html`. If the platform has no
    subagent capability, invoke `reveal-assumptions` directly instead. Read the
-   five ranked assumptions from the resulting dashboard; do not independently
-   replace its audit.
+   five ranked assumptions and any `.code-ref` source links from the resulting
+   dashboard; do not independently replace its audit.
 5. If the user supplies or has already identified a relevant audience-profile
    Markdown file, read it in full and apply its register to the notebook. If no
    profile is available, continue in a clear, concise, neutral research style
@@ -52,9 +52,9 @@ Give every daily entry exactly these four elements:
 - **Work performed**: a compact account of what changed and what the evidence
   establishes;
 - **Assumptions**: the five ranked assumptions supplied by
-  `reveal-assumptions`, using only each assumption statement. Omit its evidence
-  and explanation, and shorten only for readability without changing meaning
-  or certainty;
+  `reveal-assumptions`, using only each assumption statement and its one
+  optional `.code-ref` source link. Omit its other evidence and explanation,
+  and shorten only for readability without changing meaning or certainty;
 - **Next steps**: concrete unfinished work supported by the current state.
 
 Apply structural changes consistently to every day. If the user removes a
@@ -68,7 +68,7 @@ explicitly asks for them.
 
 ## Notebook contract
 
-- Keep the edited template's warm light-mode visual system, typography,
+- Keep the edited template's current light-mode visual system, typography,
   two-column desktop layout, mobile readability, entry navigation, and print
   behavior.
 - Keep the sidebar limited to notebook label, project title, researcher name
@@ -83,11 +83,32 @@ explicitly asks for them.
   output directory.
 - Preserve the browser editing layer: users must be able to edit text, delete
   or add items, autosave changes locally, and reset edits.
+- Preserve the assumption source-link layer: clicking a `.code-ref` link must
+  open an in-page preview with the cited lines highlighted and a raw-file link.
 - Replace example names, dates, paths, project details, and scientific claims.
 - Remove every unused element marked `data-template-example`; no template-only
   result, figure, path, or caption may remain in a finished notebook.
 - Do not expose secrets, credentials, private identifiers, or unnecessary
   machine-specific paths.
+
+## Assumption source links
+
+For each assumption that includes an exact implementation citation from
+`reveal-assumptions`, place this link directly below the statement:
+
+```html
+<a class="code-ref" href="./src/analysis.py#L42"
+   data-code-path="src/analysis.py" data-code-start="42" data-code-end="47"
+   contenteditable="false">src/analysis.py:42–47</a>
+```
+
+Use project-relative POSIX paths, retain the verified line range, and include
+at most one link per assumption. Remove the template's example link when no
+real source citation exists. Keep the link itself non-editable. The bundled
+template fetches the adjacent source file, shows three context lines on either
+side, highlights the cited range, and falls back to a raw-file link when the
+preview cannot be fetched. Serve the project directory over HTTP when testing
+source previews; browsers commonly block local `file://` fetches.
 
 ## ASTRA-linked results
 

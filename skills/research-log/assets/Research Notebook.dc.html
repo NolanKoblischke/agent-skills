@@ -126,6 +126,36 @@
   .astra-popover-key { color: #7890A4; text-transform: uppercase; letter-spacing: .06em; }
   .astra-popover-note { margin-top: 10px; padding-top: 9px; border-top: 1px solid var(--line); font: 12px/1.45 "Nunito Sans", Arial, sans-serif; color: #46647B; }
   .astra-popover-hint { margin-top: 8px; color: #7890A4; font-size: 9px; }
+  .code-ref {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; padding: 6px 10px;
+    border: 2px solid var(--line); border-radius: 999px; background: var(--blue-pale); color: #167BB1;
+    font: 600 10px/1.2 "IBM Plex Mono", monospace; text-decoration: none; cursor: pointer;
+  }
+  .code-ref::before { content: "</>"; color: var(--navy); font-size: 9px; }
+  .code-ref::after { content: "↗"; color: var(--navy); font-size: 9px; }
+  .code-ref:hover, .code-ref:focus-visible {
+    border-color: var(--navy); background: var(--yellow); color: var(--navy); text-decoration: none; outline: none;
+  }
+  .code-popover {
+    position: fixed; z-index: 1100; inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+    width: min(760px, calc(100vw - 28px)); max-height: min(620px, calc(100vh - 28px)); overflow: auto;
+    padding: 20px; border: 2px solid var(--navy); border-top: 8px solid var(--blue);
+    background: var(--white); box-shadow: 8px 8px 0 rgba(18,59,96,.18); border-radius: 16px;
+    color: var(--ink);
+  }
+  .code-popover[hidden] { display: none; }
+  .code-popover-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
+  .code-popover-label { color: #167BB1; font: 700 10px/1.4 "IBM Plex Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .code-popover-path { margin-top: 4px; color: var(--navy); font: 600 13px/1.4 "IBM Plex Mono", monospace; overflow-wrap: anywhere; }
+  .code-popover-close { border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 25px; line-height: 1; }
+  .code-popover-close:hover, .code-popover-close:focus-visible { color: var(--navy); outline: 3px solid var(--yellow); }
+  .code-popover pre { margin: 0; padding: 13px 0; overflow: auto; background: var(--blue-pale); border: 1px solid var(--line); font: 11px/1.55 "IBM Plex Mono", monospace; }
+  .code-line { display: grid; grid-template-columns: 48px 1fr; min-width: max-content; padding: 0 13px 0 0; }
+  .code-line-number { padding-right: 11px; color: #7890A4; text-align: right; user-select: none; }
+  .code-line.is-target { background: #FFF4B8; box-shadow: inset 4px 0 var(--blue); }
+  .code-line.is-target .code-line-number { color: var(--navy); font-weight: 700; }
+  .code-popover-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; color: var(--muted); font: 10px/1.4 "IBM Plex Mono", monospace; }
+  .code-popover-footer a { font-weight: 700; }
   .research-editor-status { color: var(--muted) !important; }
   .research-editor-button {
     border: 2px solid var(--navy) !important; border-radius: 999px !important;
@@ -148,6 +178,7 @@
     .notebook-shell { border: 0; box-shadow: none; }
     aside { display: none !important; }
     .astra-popover { display: none !important; }
+    .code-popover { display: none !important; }
     .astra-value { color: inherit; border: 0; }
     .astra-value::after { display: none; }
   }
@@ -289,13 +320,14 @@
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A1</span>
             <div>
-              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The selected inputs are representative of the population addressed by the research question.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">I hardcoded the crop coordinate and it might be internally inconsistent.</div>
+              <a class="code-ref" href="./src/analysis.py#L42" data-code-path="src/analysis.py" data-code-start="42" data-code-end="47" data-template-example="source-link" contenteditable="false">src/analysis.py:42–47</a>
             </div>
           </li>
           <li style="display:flex; gap:14px; align-items:flex-start">
             <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#8C2F1F; flex:none; paddingTop:4px">A2</span>
             <div>
-              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">The primary metric captures the outcome the researcher intends to measure.</div>
+              <div data-template-example="assumption" style="font-size:15px; line-height:1.6; maxWidth:60ch">I didn't verify if the bands were 'g,r,i,z' or 'g,r,z,y', this might be wrong!</div>
             </div>
           </li>
           <li style="display:flex; gap:14px; align-items:flex-start">
@@ -429,6 +461,7 @@
 </div>
 </x-dc>
 <div class="astra-popover" data-astra-popover hidden role="dialog" aria-label="ASTRA value details"></div>
+<div class="code-popover" data-code-popover hidden role="dialog" aria-modal="true" aria-label="Source code preview"></div>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { day: 13, section: 'work' };
@@ -539,6 +572,74 @@ class Component extends DCLogic {
   });
   window.addEventListener("resize", hide);
   window.addEventListener("scroll", () => { if (!pinned) hide(); }, true);
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+  const preview = document.querySelector("[data-code-popover]");
+  let trigger = null;
+
+  function escapeHtml(value) {
+    const node = document.createElement("div");
+    node.textContent = value == null ? "" : String(value);
+    return node.innerHTML;
+  }
+
+  function closePreview() {
+    preview.hidden = true;
+    preview.innerHTML = "";
+    if (trigger && trigger.isConnected) trigger.focus();
+    trigger = null;
+  }
+
+  async function openPreview(link) {
+    const path = link.dataset.codePath;
+    const start = Number(link.dataset.codeStart);
+    const end = Number(link.dataset.codeEnd || start);
+    trigger = link;
+    preview.hidden = false;
+    preview.innerHTML = `<div class="code-popover-label">Loading source</div><div class="code-popover-path">${escapeHtml(path)}:${start}</div>`;
+
+    try {
+      if (!path || !Number.isInteger(start) || !Number.isInteger(end) || start < 1 || end < start) throw new Error("Invalid source range");
+      const response = await fetch(path);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const lines = (await response.text()).split(/\r?\n/);
+      if (start > lines.length) throw new Error("Source range is outside the file");
+      const first = Math.max(1, start - 3);
+      const last = Math.min(lines.length, end + 3);
+      let rendered = "";
+      for (let line = first; line <= last; line += 1) {
+        rendered += `<span class="code-line${line >= start && line <= end ? " is-target" : ""}"><span class="code-line-number">${line}</span><span>${escapeHtml(lines[line - 1]) || " "}</span></span>`;
+      }
+      preview.innerHTML = `
+        <div class="code-popover-header">
+          <div><div class="code-popover-label">Implementation source</div><div class="code-popover-path">${escapeHtml(path)}:${start}${end !== start ? `–${end}` : ""}</div></div>
+          <button type="button" class="code-popover-close" data-code-close aria-label="Close source preview">×</button>
+        </div>
+        <pre>${rendered}</pre>
+        <div class="code-popover-footer"><span>Highlighted lines are the cited implementation.</span><a href="${encodeURI(path)}#L${start}" target="_blank" rel="noopener">Open raw source ↗</a></div>`;
+      preview.querySelector("[data-code-close]").focus();
+    } catch (error) {
+      preview.innerHTML = `<div class="code-popover-header"><div><div class="code-popover-label">Source preview unavailable</div><div class="code-popover-path">${escapeHtml(path)}:${start}</div></div><button type="button" class="code-popover-close" data-code-close aria-label="Close source preview">×</button></div><div class="code-popover-footer"><span>Serve this project folder over HTTP to preview exact lines.</span><a href="${encodeURI(path || "")}#L${start}" target="_blank" rel="noopener">Open raw source ↗</a></div>`;
+      preview.querySelector("[data-code-close]").focus();
+    }
+  }
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest && event.target.closest(".code-ref");
+    if (link) {
+      event.preventDefault();
+      openPreview(link);
+      return;
+    }
+    if (event.target.closest && event.target.closest("[data-code-close]")) closePreview();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !preview.hidden) closePreview();
+  });
 })();
 </script>
 </body>
